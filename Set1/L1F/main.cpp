@@ -1,6 +1,6 @@
 /* CSCI 261: Errors
  *
- * Author: XXXX (_INSERT_YOUR_NAME_HERE_)
+ * Author: Nick willis
  *
  *    This program illustrates a variety of common errors.
  *    Fix the errors in each section.
