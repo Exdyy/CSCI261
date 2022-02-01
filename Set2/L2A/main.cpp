@@ -44,7 +44,7 @@ int main() {
                     cerr << "Error opening output file-d";
                     return -1;
                 }
-                cout << "DEBUG: modified c = " << char(c + 2) << '\n';
+                cout << "DEBUG: modified c = " << char(c + 1) << '\n';
                 decipheredMessage << (char)(c + 1);
                 break;
 
