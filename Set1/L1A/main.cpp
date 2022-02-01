@@ -1,4 +1,4 @@
-/* CSCI 261: Lab 1A, Math Equation Solver
+/* CSCI 261: Lab 1A - Math Equation Solver
  *
  * Author: Nick Willis
  * Resources used: Lecture from 1/14/2022

@@ -1,13 +1,4 @@
 /* CSCI 261: Lab 1E - Makefile Targets      
-      .-'` /     \'-'/     \ `'-.
-     /    |      |   |      |    \
-    ;      \_  _/     \_  _/      ;
-   |         ``         ``         |
-   |                               |
-    ;    .-.   .-.   .-.   .-.    ;
-     \  (   '.'   \ /   '.'   )  /
-      '-.;         V         ;.-'
-          `                 `
  *
  * Author: Nick Willis
  * Resources used:
