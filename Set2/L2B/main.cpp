@@ -1,4 +1,3 @@
-
 #include <cstdlib>
 #include <random>
 #include <ctime>
@@ -7,22 +6,22 @@
 
 using namespace std;
 
-bool inclusive1, inclusive2;
+bool inclusiveMax, inclusiveMin;
 int minInt, maxInt;
 float minFloat, maxFloat;
-char choice1, choice2;
+char choiceMax, choiceMin;
 
-int generate_random_integer(int minInt, int maxInt, bool inclusive1){
-    // srand(time(0));
-    int randInt = rand() % (maxInt - minInt + inclusive1) + minInt;
+int generate_random_integer(int minInt, int maxInt, bool inclusiveMax, bool inclusiveMin){
+    
+    int randInt = rand() % ((maxInt - inclusiveMax) - minInt + !inclusiveMin) + (minInt + inclusiveMin);
     cout << "Randomly generated integer: " << randInt << endl;
 
     return 0;      
 }
 
-float generate_random_float(float minFloat, float maxFloat, bool inclusive2) {
-    // srand(time(0));
-    float randFloat = rand() / double(RAND_MAX) * (maxFloat - minFloat - 1 + inclusive2) + minFloat;
+float generate_random_float(float minFloat, float maxFloat, bool inclusiveMax, bool inclusiveMin){
+    
+    float randFloat = float(rand()) / float(RAND_MAX) * ((maxFloat - 0.001*inclusiveMax) - (minFloat + 0.001*inclusiveMin)) + minFloat;
     cout << fixed << setprecision(3) << " Randomly generated float: " << randFloat << endl;
 
     return 0;
@@ -30,41 +29,106 @@ float generate_random_float(float minFloat, float maxFloat, bool inclusive2) {
 
 
 int main(){
-
+    srand(time(NULL));
     printf("Enter minimum integer for your range: \n");
-    scanf("%d",&minInt);
-    printf("Enter maximum integer for your range: \n");
-    scanf("%d",&maxInt);
-
-    printf("Do you want this range to be inclusive? (Y/N): ");
-    scanf(" %c", choice1);
-    switch(choice1) {
+    scanf("%d", &minInt);
+    printf("Do you want this minimum integer to be inclusive? (Y/N): ");
+    invalidMinInteger:
+    scanf(" %c", &choiceMin);
+    switch(choiceMin) {
         case 'Y':
-            inclusive1 = 1; break;
+            inclusiveMin = 0;
+            break;
+        case 'y':
+            inclusiveMin = 0;
+            break;
         case 'N':
-            inclusive1 = 0; break;
+            inclusiveMin = 1;
+            break;
+        case 'n':
+            inclusiveMin = 1;
+            break;
+        default:
+            printf("Invalid selection, enter (Y/N)");
+            goto invalidMinInteger;
     }
 
+    printf("Enter maximum integer for your range: \n");
+    scanf("%d", &maxInt);
+    printf("Do you want this maximum integer to be inclusive? (Y/N): ");
+    invalidMaxInteger: 
+    scanf(" %c", &choiceMax);
+    switch(choiceMax) {
+        case 'Y':
+            inclusiveMax = 0;
+            break;
+        case 'y':
+            inclusiveMax = 0;
+            break;
+        case 'N':
+            inclusiveMax = 1;
+            break;
+        case 'n':
+            inclusiveMax = 1;
+            break;
+        default:
+            printf("Invalid selection, enter (Y/N)");
+            goto invalidMaxInteger;
+    }
+
+
     for (int i = 0; i < 10; i++) {
-        generate_random_integer(minInt, maxInt, inclusive1);
+        generate_random_integer(minInt, maxInt, inclusiveMax, inclusiveMin);
     }
 
     printf("Enter minimum float for your range: \n");
-    scanf("%f",&minFloat);
-    printf("Enter maximum float for your range: \n");
-    scanf("%f",&maxFloat);
-
-    printf("Do you want this range to be inclusive? (Y/N): ");
-    scanf(" %c", choice2);
-    switch(choice2) {
+    scanf("%f", &minFloat);
+    printf("Do you want this minimum float to be inclusive? (Y/N): ");
+    invalidMinFloat:
+    scanf(" %c", &choiceMin);
+    switch(choiceMin) {
         case 'Y':
-            inclusive2 = 1; break;
+            inclusiveMin = 0;
+            break;
+        case 'y':
+            inclusiveMin = 0;
+            break;
         case 'N':
-            inclusive2 = 0; break;
+            inclusiveMin = 1;
+            break;
+        case 'n':
+            inclusiveMin = 1;
+            break;
+        default:
+            printf("Invalid selection, enter (Y/N)");
+            goto invalidMinFloat;
+    }
+
+    printf("Enter maximum float for your range: \n");
+    scanf("%f", &maxFloat);
+    printf("Do you want this maximum float to be inclusive? (Y/N): ");
+    invalidMaxFloat:
+    scanf(" %c", &choiceMax);
+    switch(choiceMax) {
+        case 'Y':
+            inclusiveMax = 0;
+            break;
+        case 'y':
+            inclusiveMax = 0;
+            break;
+        case 'N':
+            inclusiveMax = 1;
+            break;
+        case 'n':
+            inclusiveMax = 1;
+            break;
+        default:
+            printf("Invalid selection, enter (Y/N)");
+            goto invalidMaxFloat;
     }
     
     for (int j = 0; j < 10; j++) {
-        generate_random_float(minFloat, maxFloat, inclusive2);
+        generate_random_float(minFloat, maxFloat, inclusiveMax, inclusiveMin);
     }
     
     return 0;
