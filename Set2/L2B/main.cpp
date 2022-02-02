@@ -15,7 +15,6 @@ int generate_random_integer(int minInt, int maxInt, bool inclusiveMax, bool incl
     
     int randInt = rand() % ((maxInt - inclusiveMax) - minInt + !inclusiveMin) + (minInt + inclusiveMin);
     cout << "Randomly generated integer: " << randInt << endl;
-
     return 0;      
 }
 
@@ -29,7 +28,9 @@ float generate_random_float(float minFloat, float maxFloat, bool inclusiveMax, b
 
 
 int main(){
+
     srand(time(NULL));
+    
     printf("Enter minimum integer for your range: \n");
     scanf("%d", &minInt);
     printf("Do you want this minimum integer to be inclusive? (Y/N): ");
