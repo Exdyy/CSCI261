@@ -13,15 +13,15 @@ char choiceMax, choiceMin;
 
 int generate_random_integer(int minInt, int maxInt, bool inclusiveMax, bool inclusiveMin){
     
-    int randInt = rand() % ((maxInt - inclusiveMax) - minInt + !inclusiveMin) + (minInt + inclusiveMin);
-    cout << "Randomly generated integer: " << randInt << endl;
+    int randInt = rand() % ((maxInt - inclusiveMax) - (minInt + inclusiveMin) + 1) + (minInt + inclusiveMin);
+    cout << "\tRandomly generated integer: " << randInt << endl;
     return 0;      
 }
 
 float generate_random_float(float minFloat, float maxFloat, bool inclusiveMax, bool inclusiveMin){
     
-    float randFloat = float(rand()) / float(RAND_MAX) * ((maxFloat - 0.001*inclusiveMax) - (minFloat + 0.001*inclusiveMin)) + minFloat;
-    cout << fixed << setprecision(3) << " Randomly generated float: " << randFloat << endl;
+    float randFloat = float(rand()) / float(RAND_MAX) * ((maxFloat - 0.001*inclusiveMax) - (minFloat + 0.001*inclusiveMin)) + (minFloat + 0.001*inclusiveMin);
+    cout << fixed << setprecision(3) << "\tRandomly generated float: " << randFloat << endl;
 
     return 0;
 }
@@ -31,7 +31,7 @@ int main(){
 
     srand(time(NULL));
     
-    printf("Enter minimum integer for your range: \n");
+    printf("Enter minimum integer for your range: ");
     scanf("%d", &minInt);
     printf("Do you want this minimum integer to be inclusive? (Y/N): ");
     invalidMinInteger:
@@ -54,7 +54,7 @@ int main(){
             goto invalidMinInteger;
     }
 
-    printf("Enter maximum integer for your range: \n");
+    printf("Enter maximum integer for your range: ");
     scanf("%d", &maxInt);
     printf("Do you want this maximum integer to be inclusive? (Y/N): ");
     invalidMaxInteger: 
@@ -82,7 +82,7 @@ int main(){
         generate_random_integer(minInt, maxInt, inclusiveMax, inclusiveMin);
     }
 
-    printf("Enter minimum float for your range: \n");
+    printf("Enter minimum float for your range: ");
     scanf("%f", &minFloat);
     printf("Do you want this minimum float to be inclusive? (Y/N): ");
     invalidMinFloat:
@@ -105,7 +105,7 @@ int main(){
             goto invalidMinFloat;
     }
 
-    printf("Enter maximum float for your range: \n");
+    printf("Enter maximum float for your range: ");
     scanf("%f", &maxFloat);
     printf("Do you want this maximum float to be inclusive? (Y/N): ");
     invalidMaxFloat:
