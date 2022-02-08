@@ -1,5 +1,5 @@
 TARGET = L2E
-SRC_FILES = main.cpp
+SRC_FILES = main.cpp calculator_functions.cpp calculator_functions.h
 
 CXX = g++
 CFLAGS = -Wall -g
@@ -20,6 +20,7 @@ $(TARGET): $(OBJECTS)
 
 %.o: %.cpp
 	$(CXX) $(CFLAGS) -o $@ -c $<
+
 
 clean:
 	$(DEL) $(TARGET) $(OBJECTS)
