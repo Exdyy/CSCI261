@@ -14,8 +14,19 @@ int main() {
     printf("1: Brick\n");
     printf("2: Wallpaper\n");
     printf("3: Private\n");
+    invalidSelection:
+    cscan("%d", &userSelection);
+
+    switch(userSelection) {
+        case 1: imageSelection = "brick";
+        case 2: imageSelection = "wallpaper";
+        case 3: imageSelection = "private";
+        default:
+            printf("Invalid selection. Please try again")
+            goto invalidSelection;
+    }
     
-    ofstream grayscale("decipheredMessage.txt");
+    ofstream grayscale("grayscale_%s.txt", imageSelection);
     ifstream originalImage("%s.txt", imageSelection);
     char c;
     
@@ -30,34 +41,6 @@ int main() {
         while (!originalImage.eof()) {
             originalImage.get(c);
             printf("c: %c\n", c);
-            switch (c) {
-                case '~':
-                printf("DEBUG: case ~\n");
-                if ( decipheredMessage.fail() ) {
-                    cerr << "Error opening output file~";
-                    return -1;
-                }
-                decipheredMessage << ' ';
-                break;
-
-                case '\n':
-                printf("DEBUG: case \\n\n");
-                if ( decipheredMessage.fail() ) {
-                    cerr << "Error opening output file\\n";
-                    return -1;
-                }
-                decipheredMessage << '\n';
-                break;
-
-                default:
-                printf("DEBUG: default case\n");
-                if ( decipheredMessage.fail() ) {
-                    cerr << "Error opening output file-d";
-                    return -1;
-                }
-                cout << "DEBUG: modified c = " << char(c + 1) << '\n';
-                decipheredMessage << (char)(c + 1);
-                break;
 
             }
         }
