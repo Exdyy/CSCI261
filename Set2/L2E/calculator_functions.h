@@ -1,6 +1,7 @@
-#include <iostream>
+#ifndef CALCULATOR_FUNCTIONS_H
+#define CALCULATOR_FUNCTIONS_H
 
-void print_result(int a, int b, int result, char op);
+void print_result(int, int, int, char);
 
 void print_options();
 
@@ -14,3 +15,4 @@ void divide(int, int);
 
 void turn_calculator_on();
 
+#endif
