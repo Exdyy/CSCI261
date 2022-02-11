@@ -1,32 +1,28 @@
-#include <string> 
-#include <iostream>
-#include <fstream>
-#include <stdlib.h>
-#include <vector>
+
+#include "ppm_functions.h"
 
 using namespace std;
-
-char c;
-string imageSelection;
 int userSelection;
 int imageNum;
 int opNum;
-string opType;
+string imageSelection;
+string opSelection;
 ifstream imageFile;
+ofstream modifiedImage;
+
+int get_user_input(int min, int max) {
 
 
-void get_user_input(int min, int max) {
-    
     invalidInput:
-    scanf("%d", &userSelection);
+    cin >> userSelection;
     if (userSelection < min || userSelection > max){
         printf("Invalid selection. Please try again.\n");
         goto invalidInput;
-    }
-
+    } else 
+    return userSelection;
 }
 
-void print_file_options(){
+int print_file_options(){
 
     printf("Which image to load?\n");
     printf("1: Brick\n");
@@ -35,74 +31,196 @@ void print_file_options(){
     get_user_input(1, 3);
 
     switch(userSelection) {
-        case 1: 
+        case 1: {
             imageSelection = "brick";
             imageNum = 1;
-            ifstream imageFile("brick.ppm");
-        case 2:
+            break;
+        }
+        case 2: {
             imageSelection = "wallpaper";
             imageNum = 2;
-            ifstream imageFile("wallpaper.ppm");
-        case 3:
+            break;
+        }
+        case 3: {
             imageSelection = "private";
             imageNum = 3;
-            ifstream imageFile("private.ppm")
+            break;
+        }
     }
+    return imageNum;
     
 }
+bool open_files(int imageNum, int opNum)
+{
+    ifstream imageFile;
+    ofstream modifiedImage;
+    bool open;
+    switch(imageNum){
+        case 1:{
+        imageFile.open("brick.ppm");
 
-void print_operation_options(int){
-    
+        if (imageFile.is_open()){
+            printf("Opening brick.ppm file\n");
+
+            switch(opNum){
+
+                case 1: {
+                modifiedImage.open("brick_grayscale.ppm");
+
+                if (modifiedImage.is_open()){
+                    printf("Writing brick_grayscale.ppm file\n");
+                    open = true;
+                    break;
+
+                } else {
+                    cerr << "Error opening output file\n";
+                    open = false;
+                    break;
+                    }
+                }
+                case 2:{
+                modifiedImage.open("brick_inverted.ppm");
+
+                if (modifiedImage.is_open()){
+                    printf("Writing brick_inverted.ppm file\n");
+                    open = true;
+                    break;
+
+                } else {
+                    cerr << "Error opening output file\n";
+                    open = false;
+                    break;
+                    }
+                }
+            }
+        } else {
+
+            open = false;
+            break;
+        }
+        break;
+        }
+        case 2:{
+        imageFile.open("wallpaper.ppm");
+
+        if (imageFile.is_open()){
+            printf("Opening wallpaper.ppm file\n");
+
+            switch(opNum){
+                case 1:{
+                modifiedImage.open("wallpaper_grayscale.ppm");
+
+                if (modifiedImage.is_open()){
+                    printf("Writing wallpaper_grayscale.ppm file\n");
+                    open = true;
+                    break;
+                } else {
+                    cerr << "Error opening output file\n";
+                    open = false;
+                    break;
+                }
+                }
+                case 2:{
+                modifiedImage.open("wallpaper_inverted.ppm");
+
+                if (modifiedImage.is_open()){
+                    printf("Writing wallpaper_inverted.ppm file\n");
+                    open = true;
+                    break;
+
+                } else {
+                    cerr << "Error opening output file\n";
+                    open = false;
+                    break;
+                }
+                }
+            }
+            break;
+        } else {
+            open = false;
+            break;
+            }
+        }
+        case 3:{
+        imageFile.open("private.ppm");
+
+        if (imageFile.is_open()){
+            printf("Opening private.ppm file\n");
+
+            switch(opNum){
+                case 1:{
+                modifiedImage.open("private_grayscale.ppm");
+
+                if (modifiedImage.is_open()){
+                    printf("Writing private_grayscale.ppm file");
+                    open = true;
+                    break;
+
+                } else {
+                    cerr << "Error opening output file";
+                    open = false;
+                    break;
+                }
+                }
+
+                case 2:{
+                modifiedImage.open("private_inverted.ppm");
+
+                if (modifiedImage.is_open()){
+                    printf("Writing private_inverted.ppm file");
+                    open = true;
+                    break;
+
+                } else {
+                    cerr << "Error opening output file";
+                    open = false;
+                    break;
+                }
+                }
+            }
+        } else {
+            open = false;
+            break;
+        }
+        }
+    }
+    return open;
+}
+
+int print_operation_options(){
+
     printf("Which operation would you like to perform?\n");
     printf("1: Convert to Grayscale\n");
     printf("2: Invert Colors\n");
     get_user_input(1, 2);
     switch(userSelection){
         case 1: 
-            opType = "grayscale"; opNum = 1;
-            if (imageNum == 1){
-                ofstream modifiedImage("grayscale_brick.ppm");
-            } else if (imageNum == 2){
-                ofstream modifiedImage("grayscale_wallpaper.ppm");
-            } else {
-                ofstream modifiedImage("grayscale_private.ppm");
-            }
+            opSelection = "grayscale"; opNum = 1;
+            open_files(imageNum, opNum);
+            break;
         case 2:
-            opType = "inverted"; opNum =2;
-            if (imageNum == 1){
-                ofstream modifiedImage("inverted_brick.ppm");
-            } else if (imageNum == 2){
-                ofstream modifiedImage("inverted_wallpaper.ppm");
-            } else {
-                ofstream modifiedImage("inverted_private.ppm");
-            }
+            opSelection = "inverted"; opNum =2;
+            open_files(imageNum, opNum);
+            break;
     }
+    return opNum;
 }
 
-bool open_files(ifstream image, ofstream modifiedImage, int imageNum, int opNum){
+// bool read_header_information(ifstream imageFile, int &width, int &height, int &maxVal)
+// {
+//     string pType;
+//     fscanf(imageFile, "%s", &pType);
+// }
+
+void test()
+{
+    string line;
+    while(!imageFile.eof())
+    {
+        getline(imageFile, line);
+        printf("%s", line.c_str());
+    }
+    imageFile.close();
+}
     
-    if (!imageFile) {
-        cerr << "Error opening input file";
-        return false;
-    } else {
-        cout << "Opening %s.ppm file" << imageSelection << endl;
-        if (!modifiedImage) {
-            cerr << "Error opening output file";
-            return false;
-        } else {
-            cout << "Writing to %s_%s.ppm file" << imageSelection << opType << endl;
-            return true;
-        }
-
-    }
-}
-
-bool read_header_information(ifstream image, int &width, int &height, int &maxVal){
-    vector<char> fileInfo;
-    while (!imageFile.eof()){
-        imageFile.get(c);
-        fileInfo.push_back(c);
-    }
-
-}
 
