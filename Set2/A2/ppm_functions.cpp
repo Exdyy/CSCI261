@@ -201,8 +201,8 @@ bool read_header_information(ifstream& imageFile, int &width, int &height, int &
     vector<int> size;
     bool valid;
     
-    while (getline(imageFile, temp) && i < 3)
-    {
+    do{
+    (getline(imageFile, temp));
             switch(i)
             {
                 case 0:
@@ -229,7 +229,7 @@ bool read_header_information(ifstream& imageFile, int &width, int &height, int &
 
             }
             i++;
-    }
+    }while (i<=2);
     if (pType == "P3")
     {
         printf("Valid P3 format\n");
@@ -238,8 +238,8 @@ bool read_header_information(ifstream& imageFile, int &width, int &height, int &
         printf("Invalid file type");
         valid = false;
     }
-    imageFile.clear();
     return valid;
+    
 }
 
 void read_and_write_modified_pixels(ifstream& imageFile, ofstream& modifiedImage, int opNum, int width, int height, int maxVal)
@@ -248,11 +248,11 @@ void read_and_write_modified_pixels(ifstream& imageFile, ofstream& modifiedImage
     string line;
     while (getline(imageFile, line))
     {
-        if(lineCount < 3)
-        {
-            lineCount++;
-            continue;
-        } else {
+        // if(lineCount < 3)
+        // {
+        //     lineCount++;
+        //     continue;
+        // } else {
             switch(opNum){
                 case 1:
                 if (lineCount % 3 == 0){
@@ -285,7 +285,7 @@ void read_and_write_modified_pixels(ifstream& imageFile, ofstream& modifiedImage
                     
         }
         
-    }
+    // }
     modifiedImage.close();
 }
 void write_header_information(ofstream& modifiedImage, int width, int height, int maxVal)
