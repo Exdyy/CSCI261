@@ -252,13 +252,13 @@ void read_and_write_modified_pixels(ifstream& imageFile, ofstream& modifiedImage
             switch(opNum){
                 case 1:
                 if (lineCount % 3 == 0){
-                    modifiedImage << int(stoi(line) * 0.299) << endl;
+                    modifiedImage << int(stoi(line) * 0.2989) << endl;
                     
                 } else if (lineCount % 3 == 1){
-                    modifiedImage << int(stoi(line) * 0.325) << endl;
+                    modifiedImage << int(stoi(line) * 0.5870) << endl;
                     
                 } else {
-                    modifiedImage << int(stoi(line) * 0.114) << endl;
+                    modifiedImage << int(stoi(line) * 0.1140) << endl;
     
                 }
                 lineCount++;
