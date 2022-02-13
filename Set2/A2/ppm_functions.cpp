@@ -2,6 +2,7 @@
 #include "ppm_functions.h"
 
 using namespace std;
+
 int userSelection;
 int imageNum;
 int opNum;
@@ -183,6 +184,7 @@ bool open_files(int imageNum, int opNum)
                 }
             }
         } else {
+            printf("Error opening input file");
             open = false;
             break;
         }
@@ -232,7 +234,6 @@ bool read_header_information(ifstream& imageFile, int &width, int &height, int &
     }while (i<=2);
     if (pType == "P3")
     {
-        printf("Valid P3 format\n");
         valid = true;
     } else {
         printf("Invalid file type");
@@ -245,22 +246,39 @@ bool read_header_information(ifstream& imageFile, int &width, int &height, int &
 
 void read_and_write_modified_pixels(ifstream& imageFile, ofstream& modifiedImage, int opNum, int width, int height, int maxVal)
 {
+    int pixCount = 0;
     int lineCount = 0;
+    int grayPixel;
     string line;
+    vector<int> newPixels = {0, 0, 0};
     while (getline(imageFile, line))
-    {
+    {   
+        if (pixCount == 3)
+        {
+            grayPixel = newPixels[0]+newPixels[1]+newPixels[2];
+            pixCount = 0;
+            modifiedImage << grayPixel << endl;
+            modifiedImage << grayPixel << endl;
+            modifiedImage << grayPixel << endl;
+            newPixels = {0, 0, 0};
+        }
             switch(opNum){
                 case 1:
                 if (lineCount % 3 == 0){
-                    modifiedImage << int(stoi(line) * 0.2989) << endl;
-                    
+                    // modifiedImage << int(stoi(line) * 0.2989) << endl;
+                    int r = stoi(line) * 0.2989;
+                    newPixels[0] = r;
                 } else if (lineCount % 3 == 1){
-                    modifiedImage << int(stoi(line) * 0.5870) << endl;
-                    
+                    // modifiedImage << int(stoi(line) * 0.5870) << endl;
+                    int g = stoi(line) * 0.5870;
+                    newPixels[1] = g;
+
                 } else {
-                    modifiedImage << int(stoi(line) * 0.1140) << endl;
-    
+                    // modifiedImage << int(stoi(line) * 0.1140) << endl;
+                    int b = stoi(line) * 0.1140;
+                    newPixels[2] = b;
                 }
+                pixCount++;
                 lineCount++;
                 break;
 
@@ -278,10 +296,13 @@ void read_and_write_modified_pixels(ifstream& imageFile, ofstream& modifiedImage
                 lineCount++;
                 break;
             }
-                    
         }
+    modifiedImage << grayPixel << endl;
+    modifiedImage << grayPixel << endl;
+    modifiedImage << grayPixel << endl;
         
     modifiedImage.close();
+    printf("\n***IMAGE CONVERSION COMPLETE***\n");
 }
 
 void write_header_information(ofstream& modifiedImage, int width, int height, int maxVal)
