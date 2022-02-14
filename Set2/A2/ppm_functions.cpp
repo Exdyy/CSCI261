@@ -20,11 +20,12 @@ int get_user_input(int min, int max)
 
     invalidInput:
     cin >> userSelection;
-    if (userSelection < min || userSelection > max){
+    if (userSelection < min || userSelection > max)
+    {
         printf("Invalid selection. Please try again.\n");
         goto invalidInput;
     } else 
-    return userSelection;
+        return userSelection;
 }
 
 int print_file_options()
@@ -84,7 +85,7 @@ bool open_files(int imageNum, int opNum)
                         {
                             cerr << "Error opening output file\n";
                             open = false;
-                            break;
+                            abort();
                         }
                     }
                     case 2:{
@@ -100,7 +101,7 @@ bool open_files(int imageNum, int opNum)
                         {
                             cerr << "Error opening output file\n";
                             open = false;
-                            break;
+                            abort();
                         }
                     }
                 }
@@ -132,7 +133,7 @@ bool open_files(int imageNum, int opNum)
                         {
                             cerr << "Error opening output file\n";
                             open = false;
-                            break;
+                            abort();
                         }
                     }
                     case 2:
@@ -149,15 +150,16 @@ bool open_files(int imageNum, int opNum)
                         {
                             cerr << "Error opening output file\n";
                             open = false;
-                            break;
+                            abort();
                         }
                     }
                 }
                 break;
-            } else {
+            } else 
+            {
                 open = false;
-                break;
-                }
+                abort();
+            }
         }
         case 3:
         {
@@ -172,15 +174,17 @@ bool open_files(int imageNum, int opNum)
                     {
                         modifiedImage.open("private_grayscale.ppm");
 
-                        if (modifiedImage.is_open()){
+                        if (modifiedImage.is_open())
+                        {
                             printf("Writing private_grayscale.ppm file");
                             open = true;
                             break;
 
-                        } else {
+                        } else 
+                        {
                             cerr << "Error opening output file";
                             open = false;
-                            break;
+                            abort();
                         }
                     }
 
@@ -188,15 +192,17 @@ bool open_files(int imageNum, int opNum)
                     {
                         modifiedImage.open("private_inverted.ppm");
 
-                        if (modifiedImage.is_open()){
+                        if (modifiedImage.is_open())
+                        {
                             printf("Writing private_inverted.ppm file");
                             open = true;
                             break;
 
-                        } else {
+                        } else 
+                        {
                             cerr << "Error opening output file";
                             open = false;
-                            break;
+                            abort();
                         }
                     }
                 }
@@ -204,7 +210,7 @@ bool open_files(int imageNum, int opNum)
             {
                 printf("Error opening input file");
                 open = false;
-                break;
+                abort();
             }
         }
     }
@@ -250,6 +256,7 @@ bool read_header_information(ifstream& imageFile, int &width, int &height, int &
         }
         i++;
     } while (i<=2);
+
     if (pType == "P3")
     {
         valid = true;
@@ -259,6 +266,7 @@ bool read_header_information(ifstream& imageFile, int &width, int &height, int &
         valid = false;
         abort();
     }
+
     return valid;
     
 }
