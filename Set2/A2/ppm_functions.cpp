@@ -62,8 +62,12 @@ int print_file_options()
     
 }
 
+
 bool open_files(int imageNum, int opNum)
 {
+    //This function takes the user's selections for the image, as well as the conversion type. Depending on the combination of selections the user has made, this function opens
+    //a specific input file, and creates a specific output file that correlates with the selected input image, and the type of conversion being applied to it. It is just a lot of nested
+    //if statements and switches combined over and over again. If any of the files fail to open, the function prints an error message to alert the user, and then kills the program.
     bool open;
     switch(imageNum){
         case 1:
@@ -340,7 +344,7 @@ void write_header_information(ofstream& modifiedImage, int width, int height, in
 
 int print_operation_options()
 {
-
+    
     printf("Which operation would you like to perform?\n");
     printf("1: Convert to Grayscale\n");
     printf("2: Invert Colors\n");
