@@ -14,6 +14,9 @@ b print_result
 
 We have to tell gdb to add the breakpoint when the function is called, since  we cannot specify a certain line because the function definition is in a separate file.
 
+Alternatively, you can add the breakpoint inside the function file by inputting the following:
+b calculator_functions.cpp:15
+
 2. Run the program, requesting to add 4 and 5
 
 run

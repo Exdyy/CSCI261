@@ -4,47 +4,40 @@
 using namespace std;
 
 int main() {
+    // Open secretMessage.txt to read and create decipheredMessage.txt to write to. 
     ofstream decipheredMessage("decipheredMessage.txt");
     ifstream secretMessage("secretMessage.txt");
-    char c;
+    char c; // Initialize character variable to store values in.
     
+    // Check to see if input file opens properly. Print error message if it does not.
     if (!secretMessage) {
         cerr << "Error opening input file";
         return -1;
     }
 
+    if ( decipheredMessage.fail() ) {
+        cerr << "Error opening output file~";
+        return -1;
+    }
 
-    if (secretMessage.is_open()) {
+
+    if (secretMessage.is_open()) { // If input file is open, run the following code
         printf("DEBUG: secretMessage is open\n");
-        while (!secretMessage.eof()) {
-            secretMessage.get(c);
+        while (!secretMessage.eof()) { // Parse through each character of the input file
+            secretMessage.get(c);      // Store character in variable c
             printf("c: %c\n", c);
+
+            // Switch statement writes to output file after checking whether input file character is equal to a space (' '), newline ('\n'), or any other character.
             switch (c) {
                 case '~':
-                printf("DEBUG: case ~\n");
-                if ( decipheredMessage.fail() ) {
-                    cerr << "Error opening output file~";
-                    return -1;
-                }
                 decipheredMessage << ' ';
                 break;
 
                 case '\n':
-                printf("DEBUG: case \\n\n");
-                if ( decipheredMessage.fail() ) {
-                    cerr << "Error opening output file\\n";
-                    return -1;
-                }
                 decipheredMessage << '\n';
                 break;
 
                 default:
-                printf("DEBUG: default case\n");
-                if ( decipheredMessage.fail() ) {
-                    cerr << "Error opening output file-d";
-                    return -1;
-                }
-                cout << "DEBUG: modified c = " << char(c + 1) << '\n';
                 decipheredMessage << (char)(c + 1);
                 break;
 

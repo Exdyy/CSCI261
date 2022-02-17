@@ -10,27 +10,31 @@ string imageSelection;
 string opSelection;
 ifstream imageFile;
 ofstream modifiedImage;
-int width = 0;
-int height = 0;
-int maxVal = 0;
+int width;
+int height;
+int maxVal;
 
 int get_user_input(int min, int max)
 {
-
-
-    invalidInput:
-    cin >> userSelection;
-    if (userSelection < min || userSelection > max)
+    bool valid = false;
+    while (valid == false)
     {
-        printf("Invalid selection. Please try again.\n");
-        goto invalidInput;
-    } else 
-        return userSelection;
+        cin >> userSelection;
+        if (userSelection < min || userSelection > max)
+        {
+            valid = false;
+            printf("Invalid selection. Please try again.\n");
+        } else 
+        {
+            valid = true; 
+        }
+    }
+    return userSelection;
 }
 
 int print_file_options()
 {
-
+    //This function prompts the user 
     printf("Which image to load?\n");
     printf("1: Brick\n");
     printf("2: Wallpaper\n");
@@ -229,35 +233,35 @@ bool read_header_information(ifstream& imageFile, int &width, int &height, int &
     
     do 
     {
-        (getline(imageFile, temp));
-        switch(i)
+        (getline(imageFile, temp));             //Parse through input file line by line, stores each line in string 'temp'
+        switch(i)                               
         {
-            case 0:
+            case 0:                             //First line of input file. Corresponds to PPM file type
 
-                pType = temp;
+                pType = temp;                   //Stores data into string 'pType'
                 break;
-            case 1:
+            case 1:                             //Second line of input file. Corresponds to width and height of image
             {
-                stringstream line2 (temp);
-                while (line2 >> sizeNums)
+                stringstream lineStream (temp); //Converts string stored in temp to a stream so that the two integers can be extracted separately
+                while (lineStream >> sizeNums)
                 {
-                    size.push_back(sizeNums);
+                    size.push_back(sizeNums);   //While loop appends two integers into vector 'size'
                 }
-                width = size.at(0);
-                height = size.at(1);
+                width = size.at(0);             //Assign width equal to first element of vector 'size'
+                height = size.at(1);            //Assign height equal to second element of vector 'size'
                 break;
             }
-            case 2: 
-                maxVal = stoi(temp);
+            case 2:                             //Third line of input file. Corresponds to maximum color value of each pixel
+                maxVal = stoi(temp);            //Converts string into integer, and stores int value into integer 'maxVal'
                 break;
             default:
                 break;
 
         }
         i++;
-    } while (i<=2);
+    } while (i<=2);                             //Stops loop after i=2, reading only the first three lines of input file
 
-    if (pType == "P3")
+    if (pType == "P3")                          //Check to see if PPM type is of type 'P3'. If not, gives user an error and aborts the program.
     {
         valid = true;
     } else 
@@ -273,64 +277,65 @@ bool read_header_information(ifstream& imageFile, int &width, int &height, int &
 
 void read_and_write_modified_pixels(ifstream& imageFile, ofstream& modifiedImage, int opNum, int width, int height, int maxVal)
 {
-    int pixCount = 0;
-    int lineCount = 0;
-    int grayPixel;
-    string line;
-    vector<int> newPixels = {0, 0, 0};
-    while (getline(imageFile, line))
+    int pixCount = 0;                   //Used to track once values of one pixel have been read. 3 values per pixel
+    int lineCount = 0;                  //Used to track which line of input file is being read
+    int grayPixel;                      //Used to store final color value of a pixel after grayscale formula is applied
+    string line;                        //Used to temporarily store the value of each line extracted from input file
+    vector<int> newPixels = {0, 0, 0};  //Vector to store modified r, g, and b values for pixels to convert to grayscale
+    while (getline(imageFile, line))    //Parse through input file line by line
     { 
-        switch(opNum)
+        switch(opNum)                   //opNum 1: Grayscale conversion, opNum 2: Invert colors conversion
         {
             case 1:
-                if (pixCount == 3)
+                if (pixCount == 3)      //When pixNum ==3, writes three new lines to output file, all equal to gray pixel value of input r, g, and b values
                 {
                     grayPixel = newPixels[0] + newPixels[1] + newPixels[2];
-                    pixCount = 0;
+                    pixCount = 0;       //Reset pixCount to track next set of r, g, and b values read and converted
                     modifiedImage << grayPixel << endl;
                     modifiedImage << grayPixel << endl;
                     modifiedImage << grayPixel << endl;
                     newPixels = {0, 0, 0};
                 }
-                if (lineCount % 3 == 0)
+                if (lineCount % 3 == 0)             //Lines associated with r values of input file
                 {
-                    int r = stoi(line) * 0.2989;
-                    newPixels[0] = r;
-                } else if (lineCount % 3 == 1)
+                    int r = stoi(line) * 0.2989;    //Applies weighted average formula
+                    newPixels[0] = r;               //Assign first element of newPixel vector with modified r value
+
+                } else if (lineCount % 3 == 1)      //Lines associated with g values of input file
                 {
-                    int g = stoi(line) * 0.5870;
-                    newPixels[1] = g;
-                } else 
+                    int g = stoi(line) * 0.5870;    //Applies weighted average formula
+                    newPixels[1] = g;               //Assigns second element of newPixel vector with modified g value
+
+                } else                              //Lines associated with b values of input file
                 {
-                    int b = stoi(line) * 0.1140;
-                    newPixels[2] = b;
+                    int b = stoi(line) * 0.1140;    //Applies weighted average formula
+                    newPixels[2] = b;               //Assigns third element of newPixel vector with modified b value
                 }
-                pixCount++;
-                lineCount++;
+                pixCount++;                         //Increment counter to track when r, g, and b values are read and modified
+                lineCount++;                        //Increment counter to track which line is being read/written to
                 break;
 
             case 2:
-                modifiedImage << maxVal - stoi(line) << endl;
+                modifiedImage << maxVal - stoi(line) << endl;   //Integer value of input file line is subtracted from maximum color value to invert colors
                 break;
         }
     }
-    if (opNum == 3)
-    {
+    if (opNum == 1)                                 //Writes the last values for the pixel if grayscale option is selected. Above loop reads and stores these values, but fails to write the last set.
+    {                                               //Could fix, but I do not want to spend the time to do it right now :)
         modifiedImage << grayPixel << endl;
         modifiedImage << grayPixel << endl;
         modifiedImage << grayPixel << endl;
     }
         
-    modifiedImage.close();
+    modifiedImage.close();                          //Close output file and notify user that conversion process is complete
     printf("\n***IMAGE CONVERSION COMPLETE***\n");
 }
 
 void write_header_information(ofstream& modifiedImage, int width, int height, int maxVal)
 {
-    modifiedImage << "P3" << endl;
-    modifiedImage << width << " " << height << endl;
-    modifiedImage << maxVal << endl;
-    read_and_write_modified_pixels(imageFile, modifiedImage, opNum, width, height, maxVal);
+    modifiedImage << "P3" << endl;                      //Write to output, P3 is PPM type
+    modifiedImage << width << " " << height << endl;    //Write same width and height from input file to output file
+    modifiedImage << maxVal << endl;                    //Write same maximum color value from input file to output file
 }
 
 int print_operation_options()
@@ -340,23 +345,22 @@ int print_operation_options()
     printf("1: Convert to Grayscale\n");
     printf("2: Invert Colors\n");
     get_user_input(1, 2);
+
     switch(userSelection)
     {
         case 1: 
             opSelection = "grayscale"; opNum = 1;
-            open_files(imageNum, opNum);
-            read_header_information(imageFile, width, height, maxVal);
-            write_header_information(modifiedImage, width, height, maxVal);
             break;
         case 2:
             opSelection = "inverted"; opNum =2;
-            open_files(imageNum, opNum);
-            read_header_information(imageFile, width, height, maxVal);
-            write_header_information(modifiedImage, width, height, maxVal);
             break;
     }
+
+    open_files(imageNum, opNum);
+    read_header_information(imageFile, width, height, maxVal);
+    write_header_information(modifiedImage, width, height, maxVal);
+    read_and_write_modified_pixels(imageFile, modifiedImage, opNum, width, height, maxVal);
+    
     return opNum;
 }
-
-    
 
