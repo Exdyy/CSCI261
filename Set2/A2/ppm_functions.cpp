@@ -6,8 +6,6 @@ using namespace std;
 int userSelection;
 int imageNum;
 int opNum;
-string imageSelection;
-string opSelection;
 ifstream imageFile;
 ofstream modifiedImage;
 int width;
@@ -16,17 +14,17 @@ int maxVal;
 
 int get_user_input(int min, int max)
 {
-    bool valid = false;
+    bool valid = false;                                         //Initialize boolean variable that checks for input validity
     while (valid == false)
     {
-        cin >> userSelection;
-        if (userSelection < min || userSelection > max)
+        cin >> userSelection;                                   //User inputs a value
+        if (userSelection < min || userSelection > max)         //If value is below min or above max, boolean returns false and user is notified. Loop repeats
         {
             valid = false;
             printf("Invalid selection. Please try again.\n");
         } else 
         {
-            valid = true; 
+            valid = true;                                       //User inputs a valid value, boolean returns true and breaks out of loop
         }
     }
     return userSelection;
@@ -34,7 +32,7 @@ int get_user_input(int min, int max)
 
 int print_file_options()
 {
-    //This function prompts the user 
+    //This function prompts the user to select the image they would like to modify.
     printf("Which image to load?\n");
     printf("1: Brick\n");
     printf("2: Wallpaper\n");
@@ -42,18 +40,15 @@ int print_file_options()
     get_user_input(1, 3);
 
     switch(userSelection) {
-        case 1: {
-            imageSelection = "brick";
-            imageNum = 1;
+        case 1: {               //Case 1: brick.ppm image is selected
+            imageNum = 1;                   
             break;
         }
-        case 2: {
-            imageSelection = "wallpaper";
+        case 2: {               //Case 2: wallpaper.ppm image is selected
             imageNum = 2;
             break;
         }
-        case 3: {
-            imageSelection = "private";
+        case 3: {               //Case 3: private.ppm image is selected
             imageNum = 3;
             break;
         }
@@ -247,12 +242,12 @@ bool read_header_information(ifstream& imageFile, int &width, int &height, int &
             case 1:                             //Second line of input file. Corresponds to width and height of image
             {
                 stringstream lineStream (temp); //Converts string stored in temp to a stream so that the two integers can be extracted separately
-                while (lineStream >> sizeNums)
+                while (lineStream >> sizeNums)  //While loop parses through string stream and stores values to integer 'sizeNums'
                 {
-                    size.push_back(sizeNums);   //While loop appends two integers into vector 'size'
+                    size.push_back(sizeNums);   //Integer in 'sizeNums' is appended to end of vector
                 }
-                width = size.at(0);             //Assign width equal to first element of vector 'size'
-                height = size.at(1);            //Assign height equal to second element of vector 'size'
+                width = size.at(0);             //Assign 'width' equal to first element of vector 'size'
+                height = size.at(1);            //Assign 'height' equal to second element of vector 'size'
                 break;
             }
             case 2:                             //Third line of input file. Corresponds to maximum color value of each pixel
@@ -302,17 +297,17 @@ void read_and_write_modified_pixels(ifstream& imageFile, ofstream& modifiedImage
                 }
                 if (lineCount % 3 == 0)             //Lines associated with r values of input file
                 {
-                    int r = stoi(line) * 0.2989;    //Applies weighted average formula
+                    int r = stoi(line) * 0.2989;    //Applies weighted average formula after converting string to int
                     newPixels[0] = r;               //Assign first element of newPixel vector with modified r value
 
                 } else if (lineCount % 3 == 1)      //Lines associated with g values of input file
                 {
-                    int g = stoi(line) * 0.5870;    //Applies weighted average formula
+                    int g = stoi(line) * 0.5870;    //Applies weighted average formula after converting string to int
                     newPixels[1] = g;               //Assigns second element of newPixel vector with modified g value
 
                 } else                              //Lines associated with b values of input file
                 {
-                    int b = stoi(line) * 0.1140;    //Applies weighted average formula
+                    int b = stoi(line) * 0.1140;    //Applies weighted average formula after converting string to int
                     newPixels[2] = b;               //Assigns third element of newPixel vector with modified b value
                 }
                 pixCount++;                         //Increment counter to track when r, g, and b values are read and modified
@@ -345,25 +340,25 @@ void write_header_information(ofstream& modifiedImage, int width, int height, in
 int print_operation_options()
 {
     
-    printf("Which operation would you like to perform?\n");
-    printf("1: Convert to Grayscale\n");
-    printf("2: Invert Colors\n");
-    get_user_input(1, 2);
+    printf("Which operation would you like to perform?\n"); //Prompt user for inputs
+    printf("1: Convert to Grayscale\n");                    //User inputs '1' -> convert image to grayscale
+    printf("2: Invert Colors\n");                           //User inputs '2' -> convert image to inverted colors
+    get_user_input(1, 2);                                   //Run input function with min of 1 and max of 2
 
     switch(userSelection)
     {
         case 1: 
-            opSelection = "grayscale"; opNum = 1;
+            opNum = 1;           //Assign opNum with the user's selection
             break;
         case 2:
-            opSelection = "inverted"; opNum =2;
+            opNum =2;             //Assign opNum with the user's selection
             break;
     }
 
-    open_files(imageNum, opNum);
-    read_header_information(imageFile, width, height, maxVal);
-    write_header_information(modifiedImage, width, height, maxVal);
-    read_and_write_modified_pixels(imageFile, modifiedImage, opNum, width, height, maxVal);
+    open_files(imageNum, opNum);                                                            //Function to open input and output files is called
+    read_header_information(imageFile, width, height, maxVal);                              //Function to read header info of input file is called
+    write_header_information(modifiedImage, width, height, maxVal);                         //Function to write header info to output file is called
+    read_and_write_modified_pixels(imageFile, modifiedImage, opNum, width, height, maxVal); //Function to convert pixel data from input to modified values for output is called
     
     return opNum;
 }
