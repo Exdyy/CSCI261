@@ -65,7 +65,7 @@ string string_remove_first_word(const string STR)  {
         }
         result.clear();
         words.erase(words.begin());
-        for (int i = 0; i < words.size() - 1; i++){
+        for (unsigned int i = 0; i < words.size() - 1; i++){
             result += words[i] + " ";
         }
         result += words[words.size() - 1];

@@ -24,7 +24,7 @@ int main()
     }
     cout << "The numbers are:";
 
-    for (int j = 0; j < nums.size(); j++)       //Loop once for each integer held in the nums vector
+    for (unsigned int j = 0; j < nums.size(); j++)       //Loop once for each integer held in the nums vector
     {
         cout << " " << nums[j];                 //Output values to console in one line, separated by spaces
     }
@@ -33,7 +33,7 @@ int main()
     max = nums.at(0);
     min = nums.at(0);
 
-    for (int k = 0; k < nums.size(); k++)       //Iterate through nums vector to find minimum and maximum values stored
+    for (unsigned int k = 0; k < nums.size(); k++)       //Iterate through nums vector to find minimum and maximum values stored
     {
         if (nums[k] > max)
         {
