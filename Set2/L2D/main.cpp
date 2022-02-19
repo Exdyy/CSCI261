@@ -1,6 +1,6 @@
-/* CSCI 261: Function Prototypes and Call Stack
+/* CSCI 261: Lab2D
  *
- * Author: XXXX (_INSERT_YOUR_NAME_HERE_)
+ * Author: Nick Willis
  *
  *    This program illustrates a variety of common errors.
  *    Fix the errors in each section.

@@ -1,3 +1,14 @@
+/* CSCI 261: Lab 2B
+ *
+ *     //Author: Nick Willis
+ *     //cplusplus.com for information on string, vector, and stringstream methods
+ *     //lecture materials
+ *     //https://youtu.be/KJgsSFOSQv0 - C++ tutorial video
+ * 
+ * Asks for user input for minimum and maximum range integers, and then floats, and whether the bounds are going to be inclusive or not. Outputs 10 random integers within the int range,
+ * and 10 random floats within the float range.
+ */
+
 #include <cstdlib>
 #include <random>
 #include <ctime>

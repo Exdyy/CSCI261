@@ -1,7 +1,15 @@
 #include <cstdlib>
 #include <iostream>
 #include <cmath>
-
+/* CSCI 261: Lab 2C
+ *
+ *     //Author: Nick Willis
+ *     //cplusplus.com for information on string, vector, and stringstream methods
+ *     //lecture materials
+ *     //https://youtu.be/KJgsSFOSQv0 - C++ tutorial video
+ * 
+ * Asks user for input to determine their conversion type. Depending on user input, calls one of two functions defined below to go from polar to cartesian coordinates or vice versa.
+ */
 
 double r, theta, x, y;
 char convChoice;
