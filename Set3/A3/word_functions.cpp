@@ -232,10 +232,10 @@ void print_max_min_letter(unsigned int letters[26]){
     float maxFreq = 100 * (fMax / totalLetters);
     float minFreq = 100 * (fMin / totalLetters);
     
-    cout << right << setw(23) << "Least Frequent Letter: " << alphabet[minIndex] << " ";
+    cout << right << setw(23) << "Least Frequent Letter: " << alphabet[minIndex] << ' ';
     cout << right << setw(10) << min << ' ';
     cout << '(' << right << setw(7) << fixed << setprecision(3) << minFreq << "%)" << endl; 
-    cout << right << setw(23) << "Most Frequent Letter: " << alphabet[maxIndex] << " ";
+    cout << right << setw(23) << "Most Frequent Letter: " << alphabet[maxIndex] << ' ';
     cout << right << setw(10) << max << ' ';
     cout << '(' << right << setw(7) << fixed << setprecision(3) << maxFreq << "%)" << endl; 
 }
