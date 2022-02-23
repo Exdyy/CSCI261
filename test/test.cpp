@@ -1,11 +1,13 @@
 #include <iostream>
+#include <string>
+#include <vector>
+
 using namespace std;
 
 int main(){
 
-signed int x = -1;
-unsigned int y = -1;
-
-cout << x << " " << y << endl;
+unsigned int letters[26] = {0};
+cout << letters << endl;
+return 0;
 
 }

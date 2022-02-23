@@ -31,25 +31,20 @@ int main(int argc, char* argv[]) {
     vector<string> allWords = read_words_from_file( fileIn );
     fileIn.close();
     cout << "Read in " << allWords.size() << " words" << endl;
-    for (int i = 0; i < allWords.size(); i++) {
-        cout << allWords[i] << endl;
-    }
+
 
     // // clean the words to remove punctuation and convert to uppercase
     remove_punctuation(allWords, "?!.,;:\"()_-'");
-    for (int i = 0; i < allWords.size(); i++) {
-        cout << allWords[i] << endl;
-    }
-    //capitalize_words(allWords);
+    capitalize_words(allWords);
 
-    // // find only the unique words in the file
-    // vector<string> uniqueWords = filter_unique_words(allWords);
-    // cout << "Encountered " << uniqueWords.size() << " unique words" << endl;
+    // find only the unique words in the file
+    vector<string> uniqueWords = filter_unique_words(allWords);
+    cout << "Encountered " << uniqueWords.size() << " unique words" << endl;
 
-    // // count the occurrences of every letter in the entire text
-    // unsigned int letters[26] = {0};
-    // count_letters(letters, allWords);
-    // print_letter_counts(letters);
+    // count the occurrences of every letter in the entire text
+    unsigned int letters[26] = {0};
+    count_letters(letters, allWords);
+    print_letter_counts(letters);
 
     // // print statistics on letter frequencies
     // print_max_min_letter(letters);

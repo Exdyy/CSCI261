@@ -12,9 +12,9 @@ bool open_file(ifstream&, string);
 
 vector<string> read_words_from_file(ifstream&);
 
-void remove_punctuation(vector<string>, string);
+void remove_punctuation(vector<string>&, string);
  
-void capitalize_words(vector<string>);
+void capitalize_words(vector<string>&);
 
 vector<string> filter_unique_words(vector<string>);
 
