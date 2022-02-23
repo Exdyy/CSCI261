@@ -46,8 +46,8 @@ int main(int argc, char* argv[]) {
     count_letters(letters, allWords);
     print_letter_counts(letters);
 
-    // // print statistics on letter frequencies
-    // print_max_min_letter(letters);
+    // print statistics on letter frequencies
+    print_max_min_letter(letters);
 
     return 0;
 }

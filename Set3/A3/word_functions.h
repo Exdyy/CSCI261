@@ -21,3 +21,5 @@ vector<string> filter_unique_words(vector<string>);
 void count_letters(unsigned int[26], vector<string>);
 
 void print_letter_counts(unsigned int[26]);
+
+void print_max_min_letter(unsigned int[26]);
