@@ -1,6 +1,13 @@
 #include <iostream> 
 #include <fstream>
-
+/* CSCI 261: Lab 2A
+ *
+ *     //Author: Nick Willis
+ *     //lecture materials
+ *     //https://youtu.be/KJgsSFOSQv0 - C++ tutorial video
+ * 
+ * This program reads an input file, applies transformations to each character depending on what their individual values are, and writes a new, deciphered text file as an output.
+ */
 using namespace std;
 
 int main() {

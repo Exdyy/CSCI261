@@ -12,6 +12,12 @@ int width;
 int height;
 int maxVal;
 
+/**
+ * @brief Receives input from user. Checks that input is within an allowable range
+ * 
+ * @param min minimum input allowed
+ * @param max maximum input allowed
+ */
 int get_user_input(int min, int max)
 {
     bool valid = false;                                         //Initialize boolean variable that checks for input validity
@@ -30,6 +36,10 @@ int get_user_input(int min, int max)
     return userSelection;
 }
 
+/**
+ * @brief Prints file options for user to terminal. Returns integer imageNum
+ * 
+ */
 int print_file_options()
 {
     //This function prompts the user to select the image they would like to modify.
@@ -57,7 +67,12 @@ int print_file_options()
     
 }
 
-
+/**
+ * @brief Opens input and output files corresponding to user selections
+ * 
+ * @param imageNum integer associated with user selection of image
+ * @param opNum integer associated with user selection of operation to perform
+ */
 bool open_files(int imageNum, int opNum)
 {
     //This function takes the user's selections for the image, as well as the conversion type. Depending on the combination of selections the user has made, this function opens
@@ -220,6 +235,15 @@ bool open_files(int imageNum, int opNum)
     return open;
 }
 
+
+/**
+ * @brief Reads first four lines of input file and checks for proper format. Extracts width, heigth, and maximum color value
+ * 
+ * @param imageFile input file being read
+ * @param width width of input image
+ * @param height height of input image
+ * @param maxVal maximum color value of input image
+ */
 bool read_header_information(ifstream& imageFile, int &width, int &height, int &maxVal)
 
 {
@@ -274,6 +298,16 @@ bool read_header_information(ifstream& imageFile, int &width, int &height, int &
     
 }
 
+/**
+ * @brief subtracts two values and prints result to terminal
+ * 
+ * @param imageFile input image file being read
+ * @param modifiedImage output image file being written
+ * @param opNum integer associated with user selection of operation to perform
+ * @param width width of input image
+ * @param height height of input image
+ * @param maxVal maximum color value of input image
+ */
 void read_and_write_modified_pixels(ifstream& imageFile, ofstream& modifiedImage, int opNum, int width, int height, int maxVal)
 {
     int pixCount = 0;                   //Used to track once values of one pixel have been read. 3 values per pixel
@@ -330,6 +364,14 @@ void read_and_write_modified_pixels(ifstream& imageFile, ofstream& modifiedImage
     printf("\n***IMAGE CONVERSION COMPLETE***\n");
 }
 
+/**
+ * @brief subtracts two values and prints result to terminal
+ * 
+ * @param modifiedImage output image file being written
+ * @param width width of input/output image
+ * @param height height of input/output image
+ * @param maxVal maximum color value of input/output image
+ */
 void write_header_information(ofstream& modifiedImage, int width, int height, int maxVal)
 {
     modifiedImage << "P3" << endl;                      //Write to output, P3 is PPM type
@@ -337,6 +379,10 @@ void write_header_information(ofstream& modifiedImage, int width, int height, in
     modifiedImage << maxVal << endl;                    //Write same maximum color value from input file to output file
 }
 
+/**
+ * @brief Prints operation options for user to terminal. Calls other functions once opNum is defined.
+ * 
+ */
 int print_operation_options()
 {
     

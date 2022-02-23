@@ -61,8 +61,7 @@ bt
 
 10. Step through the program until we have moved out of the two lower stack frames
 
-step
-step
+finish
 
 11. Print the stack trace again
 

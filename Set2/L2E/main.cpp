@@ -1,3 +1,10 @@
+/* CSCI 261: Lab2E
+ *
+ * Author: Nick Willis
+ *
+ *
+ */
+
 #include "calculator_functions.h"
 #include <iostream>
 using namespace std;
