@@ -36,7 +36,7 @@ int array_get_element_at(int *&pARRAY, int SIZE, int POS);
  * 
  * @note Runtime of function O(?)
  */
-void array_set_element_at(int *pARRAY, int SIZE, int POS, int VALUE);
+void array_set_element_at(int *&pARRAY, int SIZE, int POS, int VALUE);
 
 /**
  * @brief Deallocates an integer array, returning its memory back to

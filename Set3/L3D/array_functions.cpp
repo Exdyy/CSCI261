@@ -11,16 +11,16 @@ int array_get_element_at(int *&pARRAY, int SIZE, int POS){
     
     int arraySize = 10;
     int element = 0;
-    if (SIZE < arraySize){
+    if (SIZE < arraySize && SIZE > 0){
         element = *pARRAY + POS;
     } 
     return element;
 }
 
-void array_set_element_at(int *pARRAY, int SIZE, int POS, int VALUE){
+void array_set_element_at(int *&pARRAY, int SIZE, int POS, int VALUE){
 
     int arraySize = 10;
-    if (SIZE < arraySize){
+    if (POS <= arraySize && POS >= 0){
         pARRAY[POS] = VALUE;
     }
 }
