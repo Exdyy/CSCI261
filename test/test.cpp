@@ -4,10 +4,15 @@
 
 using namespace std;
 
-int main(){
+void array_allocate(int *&pARRAY, int INIT_SIZE){
+    pARRAY = new int[INIT_SIZE];
+}
 
-unsigned int letters[26] = {0};
-cout << letters << endl;
-return 0;
+int main(){
+    int *pArray = nullptr;
+    array_allocate(pArray, 10);
+
+    cout << pArray << endl;
+    return 0;
 
 }

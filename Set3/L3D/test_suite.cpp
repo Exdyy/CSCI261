@@ -52,15 +52,15 @@ bool run_all_tests()  {
     array_allocate(pArray, currArraySize);
     totalPassed += test_int_pointer_not(   totalNumTests,  "Testing array_allocate",              pArray , nullptr );
     totalPassed += test_int(               totalNumTests,  "Testing array_allocate size",         currArraySize , 10 );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, 3), 0 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, 3), 0 );
     
-    // for(int i = 0; i < currArraySize; i++) {
-    //     array_set_element_at(pArray, currArraySize, i, 1);
-    // }
-    // totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 3), 1 );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 7), 1 );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, -1), 0 );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, 13), 0 );
+    for(int i = 0; i < currArraySize; i++) {
+        array_set_element_at(pArray, currArraySize, i, 1);
+    }
+    totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 3), 1 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 7), 1 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, -1), 0 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, 13), 0 );
     
     // array_set_element_at(pArray, currArraySize, 3, 3);
     // totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 3), 3 );
