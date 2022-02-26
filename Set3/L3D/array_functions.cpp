@@ -21,6 +21,13 @@ void array_set_element_at(int *&pARRAY, int SIZE, int POS, int VALUE){
 
     int arraySize = 10;
     if (POS <= arraySize && POS >= 0){
-        pARRAY[POS] = VALUE;
+        int *arraySlot = pARRAY;
+        arraySlot += POS;
+        *arraySlot = VALUE;
+        cout << "POS " << POS << ": ";
+        for (int i = 0; i < arraySize; i++){
+            cout << *arraySlot << ' ';
+        }
+        cout << endl;
     }
 }

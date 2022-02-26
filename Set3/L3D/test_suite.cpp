@@ -50,6 +50,13 @@ bool run_all_tests()  {
     int currArraySize = 10;
     
     array_allocate(pArray, currArraySize);
+
+    cout << "pArray in test suite before elements modified: ";
+    for (int i = 0; i < currArraySize; i++) {
+        cout << *&pArray[i] << ' ';
+    }
+    cout << endl;
+
     totalPassed += test_int_pointer_not(   totalNumTests,  "Testing array_allocate",              pArray , nullptr );
     totalPassed += test_int(               totalNumTests,  "Testing array_allocate size",         currArraySize , 10 );
     totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, 3), 0 );
@@ -57,6 +64,13 @@ bool run_all_tests()  {
     for(int i = 0; i < currArraySize; i++) {
         array_set_element_at(pArray, currArraySize, i, 1);
     }
+
+    cout << "pArray in test suite after elements modified: ";
+    for (int i = 0; i < currArraySize; i++) {
+        cout << *&pArray[i] << ' ';
+    }
+    cout << endl;
+    
     totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 3), 1 );
     totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 7), 1 );
     totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, -1), 0 );

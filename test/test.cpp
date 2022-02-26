@@ -21,15 +21,22 @@ int main(){
     int *pArray = nullptr;
     int currArraySize = 10;
     array_allocate(pArray, 10);
-
-    cout << pArray << endl;
+    
+    cout << "pArray: " << pArray << endl;
+    cout << "*pArray values: ";
+    for (int i = 0; i < 10; i++){
+        cout << *&pArray[i] << ' ';
+    }
+    cout << endl;
 
     for(int i = 0; i < currArraySize; i++) {
         array_set_element_at(pArray, currArraySize, i, 1);
     }
+    cout << "Modified pArray values: ";
     for (int i = 0; i < 10; i++){
-        cout << *&pArray[i] << endl;
+        cout << *&pArray[i] << ' ';
     }
+    cout << endl;
     return 0;
 
 }
