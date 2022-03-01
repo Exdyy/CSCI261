@@ -51,12 +51,6 @@ bool run_all_tests()  {
     
     array_allocate(pArray, currArraySize);
 
-    cout << "pArray in test suite before elements modified: ";
-    for (int i = 0; i < currArraySize; i++) {
-        cout << *&pArray[i] << ' ';
-    }
-    cout << endl;
-
     totalPassed += test_int_pointer_not(   totalNumTests,  "Testing array_allocate",              pArray , nullptr );
     totalPassed += test_int(               totalNumTests,  "Testing array_allocate size",         currArraySize , 10 );
     totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, 3), 0 );
@@ -64,52 +58,76 @@ bool run_all_tests()  {
     for(int i = 0; i < currArraySize; i++) {
         array_set_element_at(pArray, currArraySize, i, 1);
     }
-
-    cout << "pArray in test suite after elements modified: ";
-    for (int i = 0; i < currArraySize; i++) {
-        cout << *&pArray[i] << ' ';
-    }
-    cout << endl;
     
     totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 3), 1 );
     totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 7), 1 );
     totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, -1), 0 );
     totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, 13), 0 );
     
-    // array_set_element_at(pArray, currArraySize, 3, 3);
-    // totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 3), 3 );
+    array_set_element_at(pArray, currArraySize, 3, 3);
+    totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 3), 3 );
     
-    // array_deallocate(pArray, currArraySize);
-    // totalPassed += test_int_pointer(       totalNumTests,  "Testing array_deallocate",            pArray , nullptr );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_deallocate size",       currArraySize , 0 );
+    array_deallocate(pArray, currArraySize);
+    totalPassed += test_int_pointer(       totalNumTests,  "Testing array_deallocate",            pArray , nullptr );
+    totalPassed += test_int(               totalNumTests,  "Testing array_deallocate size",       currArraySize , 0 );
 
-    // array_allocate(pArray, currArraySize);
-    // totalPassed += test_int_pointer_not(   totalNumTests,  "Testing array_allocate empty",        pArray , nullptr );
+    array_allocate(pArray, currArraySize);
+    totalPassed += test_int_pointer_not(   totalNumTests,  "Testing array_allocate empty",        pArray , nullptr );
     
-    // array_insert_at_position(pArray, currArraySize, currArraySize+1, 5);
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 1 );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() back",      array_get_element_at(pArray, currArraySize, 0), 5 );
+    array_insert_at_position(pArray, currArraySize, currArraySize+1, 5);
+    cout << "DEBUG: ";
+    for (int i = 0; i < currArraySize; i++){
+        cout << pArray[i] << " ";
+    }
+    cout << endl;
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 1 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() back",      array_get_element_at(pArray, currArraySize, 0), 5 );
 
-    // array_insert_at_position(pArray, currArraySize, currArraySize, 3);
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 2 );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() back",      array_get_element_at(pArray, currArraySize, 1), 3 );
+    array_insert_at_position(pArray, currArraySize, currArraySize, 3);
+    cout << "DEBUG: ";
+    for (int i = 0; i < currArraySize; i++){
+        cout << pArray[i] << " ";
+    }
+    cout << endl;
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 2 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() back",      array_get_element_at(pArray, currArraySize, 1), 3 );
     
-    // array_insert_at_position(pArray, currArraySize, 0, 2);
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 3 );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() front",     array_get_element_at(pArray, currArraySize, 1), 5 );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() front",     array_get_element_at(pArray, currArraySize, 0), 2 );
+    array_insert_at_position(pArray, currArraySize, 0, 2);
+    cout << "DEBUG: ";
+    for (int i = 0; i < currArraySize; i++){
+        cout << pArray[i] << " ";
+    }
+    cout << endl;
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 3 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() front",     array_get_element_at(pArray, currArraySize, 1), 5 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() front",     array_get_element_at(pArray, currArraySize, 0), 2 );
     
-    // array_insert_at_position(pArray, currArraySize, -5, -1);
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 4 );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() front",     array_get_element_at(pArray, currArraySize, 0), -1 );
+    array_insert_at_position(pArray, currArraySize, -5, -1);
+    cout << "DEBUG: ";
+    for (int i = 0; i < currArraySize; i++){
+        cout << pArray[i] << " ";
+    }
+    cout << endl;
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 4 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() front",     array_get_element_at(pArray, currArraySize, 0), -1 );
     
-    // array_insert_at_position(pArray, currArraySize, 30, 20);
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 5 );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() back",      array_get_element_at(pArray, currArraySize, 4), 20 );
+    array_insert_at_position(pArray, currArraySize, 30, 20);
+    cout << "DEBUG: ";
+    for (int i = 0; i < currArraySize; i++){
+        cout << pArray[i] << " ";
+    }
+    cout << endl;
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 5 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() back",      array_get_element_at(pArray, currArraySize, 4), 20 );
     
-    // array_insert_at_position(pArray, currArraySize, 2, 12);
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 6 );
-    // totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() pos 2",     array_get_element_at(pArray, currArraySize, 2), 12 );
+    array_insert_at_position(pArray, currArraySize, 2, 12);
+    cout << "DEBUG: ";
+    for (int i = 0; i < currArraySize; i++){
+        cout << pArray[i] << " ";
+    }
+    cout << endl;
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 6 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() pos 2",     array_get_element_at(pArray, currArraySize, 2), 12 );
     
     // totalPassed += test_int(               totalNumTests,  "Testing array_min",                   array_min(pArray, currArraySize), -1 );
     // totalPassed += test_int(               totalNumTests,  "Testing array_max",                   array_max(pArray, currArraySize), 20 );

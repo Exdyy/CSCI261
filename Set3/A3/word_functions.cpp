@@ -74,14 +74,16 @@ vector<string> filter_unique_words(vector<string> allWords){
     uniques.push_back(allWords[0]);
     for (unsigned int i = 0; i < allWords.size(); i++){
         unsigned int j = 0;
-        int wordCount = 0;
+        bool isUnique = true;
         for (j = 0; j < uniques.size(); j++){
             if (allWords[i] == uniques[j]){
-                wordCount++;
+                isUnique = false;
                 break;
+            } else {
+                isUnique = true;
             }
         }
-        if (wordCount == 0){
+        if (isUnique == true){
             uniques.push_back(allWords[i]);
         }
     }
