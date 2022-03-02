@@ -9,7 +9,7 @@ void array_allocate(int *&pARRAY, int INIT_SIZE){
     }
 }
 
-int array_get_element_at(int *&pARRAY, int SIZE, int POS){
+int array_get_element_at(int *pARRAY, int SIZE, int POS){
     
     int arraySize = 10;
     int element = 0;
@@ -102,40 +102,48 @@ int array_max(int *pARRAY, int SIZE){
 void array_remove_from_position(int *&pARRAY, int &SIZE, int POS){
 
     bool skip = false;
-    SIZE = SIZE - 1;
-    int *newArray = new int[SIZE];
-    array_allocate(newArray, SIZE);
-    if (POS >= SIZE + 1){
-        for (int i = 0; i < SIZE; i++){
-            newArray[i] = pARRAY[i];
-        }
-    }
-    if (POS <= 0){
-        POS = 0;
-    }
-    if (POS < SIZE){
-        for (int i = 0; i < SIZE; i++){
-            if (i == POS){
-                skip = true;
-            }
-            if (skip == false){
+    if (SIZE > 0){
+        SIZE = SIZE - 1;
+        int *newArray = new int[SIZE];
+        array_allocate(newArray, SIZE);
+        if (POS >= SIZE + 1){
+            for (int i = 0; i < SIZE; i++){
                 newArray[i] = pARRAY[i];
-            } else {
-                newArray[i] = pARRAY[i+1];
             }
         }
+        if (POS <= 0){
+            POS = 0;
+        }
+        if (POS < SIZE){
+            for (int i = 0; i < SIZE; i++){
+                if (i == POS){
+                    skip = true;
+                }
+                if (skip == false){
+                    newArray[i] = pARRAY[i];
+                } else {
+                    newArray[i] = pARRAY[i+1];
+                }
+            }
+        }
+        delete pARRAY;
+        pARRAY = newArray;
+    } else if (SIZE == 0){
+        delete pARRAY;
+        pARRAY = nullptr;
     }
-    delete pARRAY;
-    pARRAY = newArray;
 }
 
 int array_find(int *pARRAY, int SIZE, int TARGET){
     int found = -1;
-    int i = 0;
-    for (int i = 0; i < SIZE && found < 0; i++){
-        if (pARRAY[i] == TARGET){
-            found = i;
+    if (SIZE == 0){
+        return -1;
+    } else {
+        for (int i = 0; i < SIZE && found < 0; i++){
+            if (pARRAY[i] == TARGET){
+                found = i;
+            }
         }
+        return found;
     }
-    return found;
 }

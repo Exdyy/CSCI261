@@ -111,11 +111,6 @@ bool run_all_tests()  {
     totalPassed += test_int(               totalNumTests,  "Testing array_remove_from() front",   array_get_element_at(pArray, currArraySize, 0) , 2 );
     
     array_insert_at_position(pArray, currArraySize, currArraySize, 12);
-    cout << "DEBUG: ";
-    for (int i = 0; i < currArraySize; i++){       
-        cout << pArray[i] << " ";
-    }
-    cout << endl << currArraySize << endl;
     totalPassed += test_int(               totalNumTests,  "Testing array_find()",                array_find(pArray, currArraySize, 12), 1 );
     totalPassed += test_int(               totalNumTests,  "Testing array_find()",                array_find(pArray, currArraySize, 25), -1 );
     totalPassed += test_int(               totalNumTests,  "Testing array_find()",                array_find(pArray, currArraySize, 3), 3 );

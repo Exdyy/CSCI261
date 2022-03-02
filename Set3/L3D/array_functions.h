@@ -23,7 +23,7 @@ void array_allocate(int *&pARRAY, int INIT_SIZE);
  * 
  * @note Runtime of function O(?)
  */
-int array_get_element_at(int *&pARRAY, int SIZE, int POS);
+int array_get_element_at(int *pARRAY, int SIZE, int POS);
 
 /**
  * @brief Sets the value of the element at a target position.  If the
