@@ -137,11 +137,6 @@ bool run_all_tests()  {
     totalPassed += test_int(               totalNumTests,  "Testing array_remove size",        currArraySize , 0 );
 
     array_remove_from_position(pArray, currArraySize, 2);
-    cout << "DEBUG: ";
-    for (int i = 0; i < currArraySize; i++){       
-        cout << pArray[i] << " ";
-    }
-    cout << endl << currArraySize << endl;
     totalPassed += test_int(               totalNumTests,  "Testing array_remove size",        currArraySize , 0 );
     totalPassed += test_int(               totalNumTests,  "Testing array_min",                array_min(pArray, currArraySize), 0 );
     totalPassed += test_int(               totalNumTests,  "Testing array_max",                array_max(pArray, currArraySize), 0 );

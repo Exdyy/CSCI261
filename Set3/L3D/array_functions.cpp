@@ -132,11 +132,9 @@ void array_remove_from_position(int *&pARRAY, int &SIZE, int POS){
 int array_find(int *pARRAY, int SIZE, int TARGET){
     int found = -1;
     int i = 0;
-    while (found == -1 && i < SIZE){
+    for (int i = 0; i < SIZE && found < 0; i++){
         if (pARRAY[i] == TARGET){
-            cout << pARRAY[i] << endl;
             found = i;
-            i++;
         }
     }
     return found;
