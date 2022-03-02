@@ -115,6 +115,6 @@ int array_find(int *pARRAY, int SIZE, int TARGET);
  * 
  * @note Runtime of function O(?)
  */
-void array_remove_from_position(int *pARRAY, int SIZE, int POS);
+void array_remove_from_position(int *&pARRAY, int &SIZE, int POS);
 
 #endif
