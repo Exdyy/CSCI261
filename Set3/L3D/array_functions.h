@@ -10,7 +10,7 @@
  * 
  * @note Runtime of function O(?)
  */
-void array_allocate(int *&pARRAY, int INIT_SIZE);
+void array_allocate(int *&pArray, int INIT_SIZE);
 
 /**
  * @brief Returns the value of the element at a target position.  If the
@@ -36,7 +36,7 @@ int array_get_element_at(int *pARRAY, int SIZE, int POS);
  * 
  * @note Runtime of function O(?)
  */
-void array_set_element_at(int *&pARRAY, int SIZE, int POS, int VALUE);
+void array_set_element_at(int *pARRAY, int SIZE, int POS, int VALUE);
 
 /**
  * @brief Deallocates an integer array, returning its memory back to
@@ -48,7 +48,7 @@ void array_set_element_at(int *&pARRAY, int SIZE, int POS, int VALUE);
  * 
  * @note Runtime of function O(?)
  */
-void array_deallocate(int *&pARRAY, int &SIZE);
+void array_deallocate(int *&pArray, int &size);
 
 /**
  * @brief Inserts a value at a target position.  If the position is
@@ -63,7 +63,7 @@ void array_deallocate(int *&pARRAY, int &SIZE);
  * 
  * @note Runtime of function O(?)
  */
-void array_insert_at_position(int *&pARRAY, int &SIZE, int POS, int VALUE);
+void array_insert_at_position(int *&pArray, int &size, int POS, int VALUE);
 
 /**
  * @brief Returns the minimum value within the array.  If array size is
@@ -115,6 +115,6 @@ int array_find(int *pARRAY, int SIZE, int TARGET);
  * 
  * @note Runtime of function O(?)
  */
-void array_remove_from_position(int *&pARRAY, int &SIZE, int POS);
+void array_remove_from_position(int *&pArray, int &size, int POS);
 
 #endif

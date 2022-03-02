@@ -2,10 +2,10 @@
 #include <iostream>
 using namespace std;
 
-void array_allocate(int *&pARRAY, int INIT_SIZE){
-    pARRAY = new int[INIT_SIZE];
+void array_allocate(int *&pArray, int INIT_SIZE){
+    pArray = new int[INIT_SIZE];
     for (int i = 0; i < INIT_SIZE; i++){
-        pARRAY[i] = 0;
+        pArray[i] = 0;
     }
 }
 
@@ -23,7 +23,7 @@ int array_get_element_at(int *pARRAY, int SIZE, int POS){
     return element;
 }
 
-void array_set_element_at(int *&pARRAY, int SIZE, int POS, int VALUE){
+void array_set_element_at(int *pARRAY, int SIZE, int POS, int VALUE){
 
     int arraySize = SIZE;
     if (POS <= arraySize && POS >= 0){
@@ -38,37 +38,37 @@ void array_set_element_at(int *&pARRAY, int SIZE, int POS, int VALUE){
     }
 }
 
-void array_deallocate(int *&pARRAY, int &SIZE){
-    delete pARRAY;
-    pARRAY = nullptr;
-    SIZE = 0;
+void array_deallocate(int *&pArray, int &size){
+    delete pArray;
+    pArray = nullptr;
+    size = 0;
 }
 
-void array_insert_at_position(int *&pARRAY, int &SIZE, int POS, int VALUE){
+void array_insert_at_position(int *&pArray, int &size, int POS, int VALUE){
 
-    SIZE = SIZE + 1;
-    int *newArray = new int[SIZE];
-    array_allocate(newArray, SIZE);
-    if (POS >= SIZE){
-        POS = SIZE - 1;
+    size = size + 1;
+    int *newArray = new int[size];
+    array_allocate(newArray, size);
+    if (POS >= size){
+        POS = size - 1;
     }
     if (POS <= 0){
         POS = 0;
     }
-    for (int i = 0; i < SIZE; i++){
+    for (int i = 0; i < size; i++){
         if (i < POS){
-            newArray[i] = pARRAY[i];
+            newArray[i] = pArray[i];
         } else if (i == POS){
             newArray[i] = VALUE;
         } else {
-            newArray[i] = pARRAY[i-1];
+            newArray[i] = pArray[i-1];
         }
     }
-    int *arraySlot = pARRAY;
+    int *arraySlot = pArray;
     arraySlot += POS;
     *arraySlot = VALUE;
-    delete pARRAY;
-    pARRAY = newArray;
+    delete pArray;
+    pArray = newArray;
 }
 
 int array_min(int *pARRAY, int SIZE){
@@ -99,38 +99,38 @@ int array_max(int *pARRAY, int SIZE){
     }
 }
 
-void array_remove_from_position(int *&pARRAY, int &SIZE, int POS){
+void array_remove_from_position(int *&pArray, int &size, int POS){
 
     bool skip = false;
-    if (SIZE > 0){
-        SIZE = SIZE - 1;
-        int *newArray = new int[SIZE];
-        array_allocate(newArray, SIZE);
-        if (POS >= SIZE + 1){
-            for (int i = 0; i < SIZE; i++){
-                newArray[i] = pARRAY[i];
+    if (size > 0){
+        size = size - 1;
+        int *newArray = new int[size];
+        array_allocate(newArray, size);
+        if (POS >= size + 1){
+            for (int i = 0; i < size; i++){
+                newArray[i] = pArray[i];
             }
         }
         if (POS <= 0){
             POS = 0;
         }
-        if (POS < SIZE){
-            for (int i = 0; i < SIZE; i++){
+        if (POS < size){
+            for (int i = 0; i < size; i++){
                 if (i == POS){
                     skip = true;
                 }
                 if (skip == false){
-                    newArray[i] = pARRAY[i];
+                    newArray[i] = pArray[i];
                 } else {
-                    newArray[i] = pARRAY[i+1];
+                    newArray[i] = pArray[i+1];
                 }
             }
         }
-        delete pARRAY;
-        pARRAY = newArray;
-    } else if (SIZE == 0){
-        delete pARRAY;
-        pARRAY = nullptr;
+        delete pArray;
+        pArray = newArray;
+    } else if (size == 0){
+        delete pArray;
+        pArray = nullptr;
     }
 }
 

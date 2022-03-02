@@ -50,7 +50,6 @@ bool run_all_tests()  {
     int currArraySize = 10;
     
     array_allocate(pArray, currArraySize);
-
     totalPassed += test_int_pointer_not(   totalNumTests,  "Testing array_allocate",              pArray , nullptr );
     totalPassed += test_int(               totalNumTests,  "Testing array_allocate size",         currArraySize , 10 );
     totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, 3), 0 );
@@ -58,7 +57,6 @@ bool run_all_tests()  {
     for(int i = 0; i < currArraySize; i++) {
         array_set_element_at(pArray, currArraySize, i, 1);
     }
-    
     totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 3), 1 );
     totalPassed += test_int(               totalNumTests,  "Testing array_set_element_at()",      array_get_element_at(pArray, currArraySize, 7), 1 );
     totalPassed += test_int(               totalNumTests,  "Testing array_get_element_at()",      array_get_element_at(pArray, currArraySize, -1), 0 );
@@ -101,11 +99,11 @@ bool run_all_tests()  {
     
     totalPassed += test_int(               totalNumTests,  "Testing array_min",                   array_min(pArray, currArraySize), -1 );
     totalPassed += test_int(               totalNumTests,  "Testing array_max",                   array_max(pArray, currArraySize), 20 );
-
+    
     array_remove_from_position(pArray, currArraySize, currArraySize);
     totalPassed += test_int(               totalNumTests,  "Testing array_remove size",           currArraySize , 5 );
     totalPassed += test_int(               totalNumTests,  "Testing array_remove_from() back",    array_get_element_at(pArray, currArraySize, currArraySize-1) , 3 );
-
+    
     array_remove_from_position(pArray, currArraySize, 0);
     totalPassed += test_int(               totalNumTests,  "Testing array_remove size",           currArraySize , 4 );
     totalPassed += test_int(               totalNumTests,  "Testing array_remove_from() front",   array_get_element_at(pArray, currArraySize, 0) , 2 );
