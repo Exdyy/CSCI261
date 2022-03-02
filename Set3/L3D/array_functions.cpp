@@ -30,11 +30,6 @@ void array_set_element_at(int *pARRAY, int SIZE, int POS, int VALUE){
         int *arraySlot = pARRAY;
         arraySlot += POS;
         *arraySlot = VALUE;
-        // cout << "POS " << POS << ": ";
-        // for (int i = 0; i < arraySize; i++){
-        //     cout << pARRAY[i] << ' ';
-        // }
-        // cout << endl;
     }
 }
 
