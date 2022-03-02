@@ -1,5 +1,5 @@
 TARGET = L3D
-SRC_FILES = main.cpp test_suite.cpp array_functions.cpp
+SRC_FILES = main.cpp array_functions.cpp test_suite.cpp
 
 CXX = g++
 CFLAGS = -Wall -g -std=c++11

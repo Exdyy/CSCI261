@@ -44,21 +44,32 @@ void array_deallocate(int *&pARRAY, int &SIZE){
     SIZE = 0;
 }
 
-void array_insert_at_position(int *&pARRAY, int &SIZE, const int &POS, int VALUE){
+void array_insert_at_position(int *&pARRAY, int &SIZE, int POS, int VALUE){
 
     SIZE += 1;
-    int pos = POS;
-    array_allocate(pARRAY, SIZE);
-    cout << "DEBUG_ALLOCATION: ";
-    for (int i = 0; i < SIZE; i++){
-        cout << pARRAY[i] << " ";
+    int *newArray = new int[SIZE];
+    array_allocate(newArray, SIZE);
+    if (POS >= SIZE){
+        POS = SIZE - 1;
     }
-    cout << endl;
-    if (pos <= 0){
-        pos = 0;
-    } else if (POS >= SIZE){
-        pos = SIZE;
+    if (POS < 0){
+        POS = 0;
     }
-    array_set_element_at(pARRAY, SIZE, pos, VALUE);
+    int *arraySlot = pARRAY;
+    arraySlot += POS;
+    *arraySlot = VALUE;
+}
 
+int array_min(int *pARRAY, int SIZE){
+    if (pARRAY == nullptr || SIZE == 0){
+        return 0;
+    } else {
+        int min = pARRAY[0];
+        for (int i = 1; i < SIZE; i++){
+            if (pARRAY[i] < min){
+                min = pARRAY[i];
+            }
+        }
+        return min;
+    }
 }

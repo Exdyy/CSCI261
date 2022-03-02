@@ -63,7 +63,7 @@ void array_deallocate(int *&pARRAY, int &SIZE);
  * 
  * @note Runtime of function O(?)
  */
-void array_insert_at_position(int *&pARRAY, int &SIZE, const int &POS, int VALUE);
+void array_insert_at_position(int *&pARRAY, int &SIZE, int POS, int VALUE);
 
 /**
  * @brief Returns the minimum value within the array.  If array size is

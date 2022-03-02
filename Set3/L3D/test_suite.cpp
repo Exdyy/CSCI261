@@ -122,14 +122,14 @@ bool run_all_tests()  {
     
     array_insert_at_position(pArray, currArraySize, 2, 12);
     cout << "DEBUG: ";
-    for (int i = 0; i < currArraySize; i++){
+    for (int i = 0; i < currArraySize; i++){       
         cout << pArray[i] << " ";
     }
     cout << endl;
     totalPassed += test_int(               totalNumTests,  "Testing array_insert size",           currArraySize , 6 );
     totalPassed += test_int(               totalNumTests,  "Testing array_insert_at() pos 2",     array_get_element_at(pArray, currArraySize, 2), 12 );
     
-    // totalPassed += test_int(               totalNumTests,  "Testing array_min",                   array_min(pArray, currArraySize), -1 );
+    totalPassed += test_int(               totalNumTests,  "Testing array_min",                   array_min(pArray, currArraySize), -1 );
     // totalPassed += test_int(               totalNumTests,  "Testing array_max",                   array_max(pArray, currArraySize), 20 );
     
     // array_remove_from_position(pArray, currArraySize, currArraySize);
