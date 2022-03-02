@@ -67,6 +67,7 @@ void array_insert_at_position(int *&pARRAY, int &SIZE, int POS, int VALUE){
     int *arraySlot = pARRAY;
     arraySlot += POS;
     *arraySlot = VALUE;
+    delete pARRAY;
     pARRAY = newArray;
 }
 
@@ -100,23 +101,43 @@ int array_max(int *pARRAY, int SIZE){
 
 void array_remove_from_position(int *&pARRAY, int &SIZE, int POS){
 
+    bool skip = false;
     SIZE = SIZE - 1;
     int *newArray = new int[SIZE];
     array_allocate(newArray, SIZE);
-    if (POS > SIZE){
-        POS = SIZE - 1;
+    if (POS >= SIZE + 1){
+        for (int i = 0; i < SIZE; i++){
+            newArray[i] = pARRAY[i];
+        }
     }
     if (POS <= 0){
         POS = 0;
     }
-    for (int i = 0; i < SIZE; i++){
-        if (i < POS){
-            newArray[i] = pARRAY[i];
-        } else if (i == POS){
-            continue;
-        } else {
-            newArray[i] = pARRAY[i];
+    if (POS < SIZE){
+        for (int i = 0; i < SIZE; i++){
+            if (i == POS){
+                skip = true;
+            }
+            if (skip == false){
+                newArray[i] = pARRAY[i];
+            } else {
+                newArray[i] = pARRAY[i+1];
+            }
         }
     }
+    delete pARRAY;
     pARRAY = newArray;
+}
+
+int array_find(int *pARRAY, int SIZE, int TARGET){
+    int found = -1;
+    int i = 0;
+    while (found == -1 && i < SIZE){
+        if (pARRAY[i] == TARGET){
+            cout << pARRAY[i] << endl;
+            found = i;
+            i++;
+        }
+    }
+    return found;
 }
