@@ -5,16 +5,10 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-
 using namespace std;
 
-using namespace std;
-string fileName;
-string word;
-ifstream input;
-vector<string> wordsInFile;
 string prompt_user_for_filename(){
-    
+    string fileName;
     cout << "Please enter a file name: ";
     cin >> fileName;
     cout << endl;
@@ -22,20 +16,21 @@ string prompt_user_for_filename(){
     return fileName;
 }
 
-bool open_file(ifstream& input, string fileName){
-   
-    input.open(fileName);
+bool open_file(ifstream& input, const string FILENAME){
+    
+    input.open(FILENAME);
     if (input.fail()){
-        cout << "Error opening file: " << fileName << endl;
+        cout << "Error opening file: " << FILENAME << endl;
         return false;
     } else{
-        cout << "File: " << fileName << " - OPEN" << endl;
+        cout << "File: " << FILENAME << " - OPEN" << endl;
         return true;
     }
 }
 
 vector<string> read_words_from_file(ifstream& input){
-
+    string word;
+    vector<string> wordsInFile;
     string temp;
     while (getline(input, temp)){
        stringstream lineReader (temp);
@@ -60,7 +55,6 @@ void remove_punctuation(vector<string> &allWords, string punc){
     }
 }
 
-
 void capitalize_words(vector<string> &allWords){
     for (unsigned int i = 0; i < allWords.size(); i++){
         for (unsigned int j = 0; j < allWords[i].length(); j++){
@@ -69,14 +63,14 @@ void capitalize_words(vector<string> &allWords){
     }
 }
 
-vector<string> filter_unique_words(vector<string> allWords){
+vector<string> filter_unique_words(const vector<string> ALL_WORDS){
     vector<string> uniques;
-    uniques.push_back(allWords[0]);
-    for (unsigned int i = 0; i < allWords.size(); i++){
+    uniques.push_back(ALL_WORDS[0]);
+    for (unsigned int i = 0; i < ALL_WORDS.size(); i++){
         unsigned int j = 0;
         bool isUnique = true;
         for (j = 0; j < uniques.size(); j++){
-            if (allWords[i] == uniques[j]){
+            if (ALL_WORDS[i] == uniques[j]){
                 isUnique = false;
                 break;
             } else {
@@ -84,16 +78,16 @@ vector<string> filter_unique_words(vector<string> allWords){
             }
         }
         if (isUnique == true){
-            uniques.push_back(allWords[i]);
+            uniques.push_back(ALL_WORDS[i]);
         }
     }
     return uniques;
 }
 
-void count_letters(unsigned int letters[26], vector<string> allWords){
-    for (unsigned int i = 0; i < allWords.size(); i++){
-        for (unsigned int j = 0; j < allWords[i].length(); j++){
-            switch (allWords[i][j]){
+void count_letters(unsigned int letters[26], const vector<string> ALL_WORDS){
+    for (unsigned int i = 0; i < ALL_WORDS.size(); i++){
+        for (unsigned int j = 0; j < ALL_WORDS[i].length(); j++){
+            switch (ALL_WORDS[i][j]){
                 case 'A':
                     letters[0]++;
                     break;
