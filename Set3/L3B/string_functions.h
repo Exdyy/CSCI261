@@ -11,8 +11,6 @@
  */
 #ifndef STRING_FUNCTIONS_H
 #define STRING_FUNCTIONS_H
-#include <sstream>
-#include <vector>
 #include <string>
 using namespace std;
 

@@ -10,6 +10,8 @@
  * Test suite that performs a variety of operations on strings, and tests to see if the output matches what is expected
  */
 #include "string_functions.h"
+#include <sstream>
+#include <vector>
 
 int string_length(const string STR)  {
     int result = -1;
