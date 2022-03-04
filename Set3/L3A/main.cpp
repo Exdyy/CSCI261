@@ -1,3 +1,14 @@
+/* CSCI 261: Assignment L3A - Array Min/Max
+ *
+ * Author: Nick Willis
+ * Resources used (Office Hours, Tutoring, Other Students, etc & in what capacity):
+ *     // list here any outside assistance you used/received while following the
+ *     // CS@Mines Collaboration Policy and the Mines Academic Code of Honor
+ *     // In class lectures
+ *     // cplusplus.com for proper syntax and functionality of libraries
+ *
+ * Prompts a user to input integers (up to 15), or input 0 in order to quit. Then print final array to console, as well as largest and smallest values contained within the array.
+ */
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -46,6 +57,6 @@ int main()
     }
     cout << "The maximum value is: " << max << endl;    //Print maximum value to console
     cout << "The minimum value is: " << min << endl;    //Print minimum value to console
-
+    cout << "Have a dandy of a day!" << endl;           
     return 0;
 }

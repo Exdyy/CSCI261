@@ -1,3 +1,16 @@
+/* CSCI 261: Assignment 3: A3 - Green Eggs and Ham
+ *
+ * Author: Nick Willis
+ * Resources used (Office Hours, Tutoring, Other Students, etc & in what capacity):
+ *     // list here any outside assistance you used/received while following the
+ *     // CS@Mines Collaboration Policy and the Mines Academic Code of Honor
+ *     // In class lectures
+ *     // cplusplus.com for proper syntax and functionality of libraries
+ *     // stackoverflow.com for troubleshooting and help with syntax errors
+ *
+ * This program reads in an input file, removes all punctuation characters, capitalizes all characters, counts number of unique words in input file's text,
+ * and then prints statistics to the user's console about various things
+ */
 #include "word_functions.h"
 
 #include <fstream>

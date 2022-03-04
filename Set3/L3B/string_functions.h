@@ -1,3 +1,14 @@
+/* CSCI 261: Assignment L3B - String Test Suite
+ *
+ * Author: Nick Willis
+ * Resources used (Office Hours, Tutoring, Other Students, etc & in what capacity):
+ *     // list here any outside assistance you used/received while following the
+ *     // CS@Mines Collaboration Policy and the Mines Academic Code of Honor
+ *     // In class lectures
+ *     // cplusplus.com for proper syntax and functionality of libraries
+ *
+ * Test suite that performs a variety of operations on strings, and tests to see if the output matches what is expected
+ */
 #ifndef STRING_FUNCTIONS_H
 #define STRING_FUNCTIONS_H
 #include <sstream>

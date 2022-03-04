@@ -1,4 +1,15 @@
 
+/* CSCI 261: Assignment L3C - Pointers
+ *
+ * Author: Nick Willis
+ * Resources used (Office Hours, Tutoring, Other Students, etc & in what capacity):
+ *     // list here any outside assistance you used/received while following the
+ *     // CS@Mines Collaboration Policy and the Mines Academic Code of Honor
+ *     // In class lectures
+ *     // cplusplus.com for proper syntax and functionality of pointers
+ *
+ * XXXXXXXX (MORE_COMPLETE_DESCRIPTION_HERE)
+ */
 #include <iostream>
 using namespace std;
 
