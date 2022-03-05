@@ -46,7 +46,7 @@ int main(){
         cin >> newInt;              //Ask user for integers
         n->value = newInt;          //Set node value = user input
         n = n->pNext;               //Step to next node
-    } while (n != nullptr);         //Stop when at last node
+    } while (n != nullptr);         //Stop at last node
 
     n = pHead;                      //Place n back at beginning of linked list, pHead
     cout << endl << setw(28) << "Array contents (forward): ";
