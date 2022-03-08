@@ -1,14 +1,19 @@
 #include "Node.h"
 class LinkedList {
-public:
-    //ATTRIBUTES
+private:
     Node *pHead;
     Node *pTail;
-    unsigned int size;  
-
-    //BEHAVIOURS
-    Node *makeNodeForValue (int);
+    Node *makeNodeForValue(const int);
+    unsigned int listSize;  
+public:
+    Node *mMakeNodeForValue (const int);
+    LinkedList();
+    ~LinkedList();
     void pushFront (int);
     void pushBack (int);
-    void popFront ();
+    int popFront ();
+    int front();
+    int back();
+    unsigned int size();
+    void print();
 };

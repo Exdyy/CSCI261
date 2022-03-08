@@ -1,5 +1,5 @@
 TARGET = L4D
-SRC_FILES = main.cpp
+SRC_FILES = main.cpp LinkedList.cpp
 
 CXX = g++
 CFLAGS = -Wall -g
