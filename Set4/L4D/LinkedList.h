@@ -3,10 +3,10 @@ class LinkedList {
 private:
     Node *pHead;
     Node *pTail;
-    Node *makeNodeForValue(const int);
+    // Node *makeNodeForValue(const int);
     unsigned int listSize;  
-public:
     Node *mMakeNodeForValue (const int);
+public:
     LinkedList();
     ~LinkedList();
     void pushFront (int);

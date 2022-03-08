@@ -31,16 +31,13 @@ Node* LinkedList::mMakeNodeForValue (const int VALUE){
 }
 
 void LinkedList::pushFront (const int VALUE) {
-    Node *n = new Node();
-    n->value = VALUE;
+    Node *n = mMakeNodeForValue (VALUE);
     n->pNext = pHead;
     pHead = n;
 }
 
 void LinkedList::pushBack (int VALUE){
-    Node *n = new Node();
-    n->value = VALUE;
-    n->pNext = nullptr;
+    Node *n = mMakeNodeForValue (VALUE);
     pTail->pNext = n;
     pTail = n;
 }
