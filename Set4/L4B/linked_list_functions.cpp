@@ -54,8 +54,7 @@ int linked_list_min(Node* pHead) {
             if (n->value < min){    //Check for smaller values
                 min = n->value;     //If found, set min = smallest value found
             }
-            n = n->pNext;           //Step to next node
-            
+            n = n->pNext;           //Step to next node 
         } while ( n != nullptr );   //Stop when no nodes left to check
         return min;                 //Return minimum value
     }
@@ -72,7 +71,6 @@ int linked_list_max(Node* pHead) {
                 max = n->value;     //If found, set max = largest value found
             }
             n = n->pNext;           //Step to next node
-            
         } while ( n != nullptr );   //Stop when no nodes left to check
         return max;                 //Return maximum value
     }
@@ -98,14 +96,14 @@ int linked_list_find(Node* pHead, const int TARGET) {
 
 Node* linked_list_remove_node_from_front(Node* pHead) {
     Node* n = pHead;
-    if (n == nullptr){      //Check for empty list
-        return nullptr;     //Return null if empty
+    if (n == nullptr){              //Check for empty list
+        return nullptr;             //Return null if empty
     } else{
-        n = n->pNext;       //Set n == pointer of second node
-        pHead->pNext = nullptr;       
-        delete pHead;       //Free up space from previous pHead node
-        pHead = n;          //Assign pHead to new first node, n
-        return pHead;       //Return pHead node
+        n = n->pNext;               //Set n == pointer of second node
+        pHead->pNext = nullptr;     //Set pointer to null to avoid dangling pointer       
+        delete pHead;               //Free up space from previous pHead node
+        pHead = n;                  //Assign pHead to new first node, n
+        return pHead;               //Return pHead node
     }
 }
 
