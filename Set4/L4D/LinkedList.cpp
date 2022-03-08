@@ -77,7 +77,7 @@ unsigned int LinkedList::size() {
     Node* n = pHead;                    //Set node to point to pHead
     if (pHead != nullptr){              //Check to see if linked list is empty, return 0 if so
         int nodeCount = 1;              //Initialize counter for number of nodes
-        while (n->pNext != nullptr) {
+        while (n != nullptr) {
             n = n->pNext;               //Step to next node in list
             nodeCount++;                //Incremement node counter
         }   
@@ -96,7 +96,7 @@ void LinkedList::print(){
         do {
             cout << n->value << ' ';
             n = n->pNext;
-        } while (n->pNext != nullptr);
+        } while (n != nullptr);
         cout << endl;
     }
 }
