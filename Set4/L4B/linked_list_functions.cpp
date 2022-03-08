@@ -102,6 +102,7 @@ Node* linked_list_remove_node_from_front(Node* pHead) {
         return nullptr;     //Return null if empty
     } else{
         n = n->pNext;       //Set n == pointer of second node
+        pHead->pNext = nullptr;       
         delete pHead;       //Free up space from previous pHead node
         pHead = n;          //Assign pHead to new first node, n
         return pHead;       //Return pHead node
