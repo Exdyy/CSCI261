@@ -13,15 +13,32 @@ LinkedList::LinkedList(){
 LinkedList::~LinkedList(){
     Node *n = pHead;
     Node *next = nullptr;
-    do {
+    while (n != nullptr){
         next = n->pNext;
         n->pNext = nullptr;
         delete n;
         n = next;
-    } while (n != nullptr);
+    }
     pHead = nullptr;
     pTail = nullptr;
     listSize = 0;
+}
+
+LinkedList::LinkedList(const LinkedList &list){
+    pHead = new Node();
+    pTail = new Node();
+    cout << "Copying list..." << endl;
+    pHead = list.pHead;
+    pTail = list.pTail;
+    listSize = size();
+}
+
+LinkedList &LinkedList::operator=(const LinkedList& list){
+    LinkedList temp(list);
+    swap(temp.pHead, pHead);
+    swap(temp.pTail, pTail);
+    swap(temp.listSize, listSize);
+    return *this;
 }
 
 Node* LinkedList::mMakeNodeForValue (const int VALUE){
@@ -33,17 +50,23 @@ Node* LinkedList::mMakeNodeForValue (const int VALUE){
 
 void LinkedList::pushFront (const int VALUE) {
     Node *n = mMakeNodeForValue (VALUE);
-    n->pNext = pHead;
-    pHead = n;
+    listSize = size();
     if (listSize == 0){
+        pHead = n;
         pTail = pHead;
+    } else if (listSize == 1) {
+        pHead = n;
+        pHead->pNext = pTail;
+    } else {
+        n->pNext = pHead;
+        pHead = n;
     }
-    listSize++;
-    delete n;
+    listSize = size();
 }
 
 void LinkedList::pushBack (int VALUE){
     Node *n = mMakeNodeForValue (VALUE);
+    listSize = size();
     if (listSize == 0){
         pHead = n;
         pTail = pHead;
@@ -54,7 +77,7 @@ void LinkedList::pushBack (int VALUE){
         pTail->pNext = n;
         pTail = n;
     }
-    listSize++;
+    listSize = size();
 }
 
 int LinkedList::popFront (){
@@ -62,11 +85,11 @@ int LinkedList::popFront (){
         Node *temp = pHead;
         int frontVal = temp->value;
         pHead = pHead->pNext;
-        listSize--;
+        listSize = size();
         return frontVal;
     } else {
         return -1;
-    }
+    } 
 }
 
 int LinkedList::front(){
@@ -82,7 +105,7 @@ int LinkedList::back(){
         return -1;
     } else {
         Node *n = pHead;
-        while (n->pNext != nullptr) {
+        while (n != pTail) {
             n = n->pNext;
         }
         return n->value;
@@ -90,7 +113,17 @@ int LinkedList::back(){
 }
 
 unsigned int LinkedList::size() {               
-    return listSize;
+    Node *n = pHead;
+    int nCount = 0;
+    if (n == nullptr) {
+        return 0;
+    } else {
+        do {
+            n = n->pNext;
+            nCount++;
+        } while (n != pTail->pNext);
+        return nCount;
+    }
 }
 
 void LinkedList::print(){
@@ -102,7 +135,8 @@ void LinkedList::print(){
         do {
             cout << n->value << ' ';
             n = n->pNext;
-        } while (n != nullptr);
+        } while (n != pTail->pNext);
         cout << endl;
     }
 }
+

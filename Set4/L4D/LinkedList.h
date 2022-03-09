@@ -8,6 +8,7 @@ public:
     Node *pHead;
     Node *pTail;
     LinkedList();
+    LinkedList(const LinkedList &object);
     ~LinkedList();
     void pushFront (int);
     void pushBack (int);

@@ -8,6 +8,8 @@ private:
 public:
     LinkedList();
     ~LinkedList();
+    LinkedList(const LinkedList &list);
+    LinkedList &operator=(const LinkedList &list);
     void pushFront (int);
     void pushBack (int);
     int popFront ();
