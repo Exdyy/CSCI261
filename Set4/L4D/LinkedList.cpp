@@ -34,12 +34,16 @@ void LinkedList::pushFront (const int VALUE) {
     Node *n = mMakeNodeForValue (VALUE);
     n->pNext = pHead;
     pHead = n;
+    n->pNext = nullptr;
+    delete n;
 }
 
 void LinkedList::pushBack (int VALUE){
     Node *n = mMakeNodeForValue (VALUE);
     pTail->pNext = n;
     pTail = n;
+    n->pNext = nullptr;
+    delete n;
 }
 
 int LinkedList::popFront (){
