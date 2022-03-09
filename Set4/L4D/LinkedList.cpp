@@ -4,20 +4,20 @@ using namespace std;
 
 LinkedList::LinkedList(){
     Node *pHead = new Node();
-    pHead = nullptr;
+    pHead->pNext = nullptr;
     Node *pTail = new Node();
-    pTail = nullptr;
+    pTail->pNext = nullptr;
     listSize = 0;
 }
 
 LinkedList::~LinkedList(){
     Node *n = pHead;
     Node *next = nullptr;
-    while (n != nullptr){
+    do {
         next = n->pNext;
         delete n;
         n = next;
-    }
+    } while (n->pNext != nullptr);
     pHead = nullptr;
     pTail = nullptr;
     listSize = 0;
@@ -79,7 +79,7 @@ int LinkedList::back(){
 
 unsigned int LinkedList::size() {
     Node* n = pHead;                    //Set node to point to pHead
-    if (pHead != nullptr){              //Check to see if linked list is empty, return 0 if so
+    if (pHead->pNext != nullptr){              //Check to see if linked list is empty, return 0 if so
         int nodeCount = 0;              //Initialize counter for number of nodes
         while (n != nullptr) {
             n = n->pNext;               //Step to next node in list

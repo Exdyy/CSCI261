@@ -64,7 +64,7 @@ int main(){
     cout << n->value << ' ';        //Output value of node one
     cout << pHead->value;           //Output value of node pHead
                                     //Array is printed in reverse in lines 60-65
-    delete pHead;                   //Free up space in free store by deleting all created nodes
+    delete pHead;                   //Deallocate memory in free store by deleting all created nodes
     delete one;
     delete two;
     delete n;

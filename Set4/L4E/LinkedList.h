@@ -1,11 +1,10 @@
 #include "Node.h"
 class LinkedList {
 private:
-    Node *pHead;
-    Node *pTail;
-    // Node *makeNodeForValue(const int);
     unsigned int listSize;  
     Node *mMakeNodeForValue (const int);
+    Node *pHead;
+    Node *pTail;
 public:
     LinkedList();
     ~LinkedList();

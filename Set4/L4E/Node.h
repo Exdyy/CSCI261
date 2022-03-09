@@ -15,7 +15,7 @@ struct Node {
      * @brief pointer to the next element of the linked list
      * 
      */
-    Node *pNext;
+    Node *pNext = nullptr;
 };
 
 #endif

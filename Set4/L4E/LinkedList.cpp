@@ -3,9 +3,9 @@
 using namespace std;
 
 LinkedList::LinkedList(){
-    Node *pHead = new Node();
+    pHead = new Node();
+    pTail = new Node();
     pHead = nullptr;
-    Node *pTail = new Node();
     pTail = nullptr;
     listSize = 0;
 }
@@ -13,33 +13,48 @@ LinkedList::LinkedList(){
 LinkedList::~LinkedList(){
     Node *n = pHead;
     Node *next = nullptr;
-    while (n != nullptr){
+    do {
         next = n->pNext;
+        n->pNext = nullptr;
         delete n;
         n = next;
-    }
+    } while (n != nullptr);
     pHead = nullptr;
     pTail = nullptr;
     listSize = 0;
 }
 
 Node* LinkedList::mMakeNodeForValue (const int VALUE){
-    Node *n = new Node();           //Allocate space for new node in free store
-    n->value = VALUE;               //Set value of node
-    n->pNext = nullptr;             //Set pointer of node to nullptr
-    return n;                       //Return newly created node
+    Node *newNode = new Node();           //Allocate space for new node in free store
+    newNode->value = VALUE;               //Set value of node
+    newNode->pNext = nullptr;             //Set pointer of node to nullptr
+    return newNode;                       //Return newly created node
 }
 
 void LinkedList::pushFront (const int VALUE) {
     Node *n = mMakeNodeForValue (VALUE);
     n->pNext = pHead;
     pHead = n;
+    if (listSize == 0){
+        pTail = pHead;
+    }
+    listSize++;
+    delete n;
 }
 
 void LinkedList::pushBack (int VALUE){
     Node *n = mMakeNodeForValue (VALUE);
-    pTail->pNext = n;
-    pTail = n;
+    if (listSize == 0){
+        pHead = n;
+        pTail = pHead;
+    } else if (listSize == 1){
+        pTail = n;
+        pHead->pNext = pTail;
+    } else {
+        pTail->pNext = n;
+        pTail = n;
+    }
+    listSize++;
 }
 
 int LinkedList::popFront (){
@@ -47,6 +62,7 @@ int LinkedList::popFront (){
         Node *temp = pHead;
         int frontVal = temp->value;
         pHead = pHead->pNext;
+        listSize--;
         return frontVal;
     } else {
         return -1;
@@ -73,18 +89,8 @@ int LinkedList::back(){
     }
 }
 
-unsigned int LinkedList::size() {
-    Node* n = pHead;                    //Set node to point to pHead
-    if (pHead != nullptr){              //Check to see if linked list is empty, return 0 if so
-        int nodeCount = 1;              //Initialize counter for number of nodes
-        while (n != nullptr) {
-            n = n->pNext;               //Step to next node in list
-            nodeCount++;                //Incremement node counter
-        }   
-        return nodeCount;               //Return int for number of nodes found
-    } else {            
-        return 0;                   
-    }
+unsigned int LinkedList::size() {               
+    return listSize;
 }
 
 void LinkedList::print(){

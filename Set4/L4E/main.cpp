@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-    LinkedList myList = LinkedList();
+    LinkedList myList;
     cout << "Size: " << myList.size() << endl;
     myList.pushFront(1);
     myList.pushBack(2);
