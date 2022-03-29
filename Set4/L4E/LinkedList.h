@@ -15,6 +15,7 @@ public:
     int popFront ();
     int front();
     int back();
+    int at();
     unsigned int size();
     void print();
 };

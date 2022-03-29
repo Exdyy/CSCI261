@@ -1,5 +1,5 @@
 TARGET = A4
-SRC_FILES = main.cpp
+SRC_FILES = main.cpp fileFunctions.cpp
 
 CXX = g++
 CFLAGS = -Wall -g
