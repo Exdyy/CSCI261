@@ -112,6 +112,18 @@ int LinkedList::back(){
     }
 }
 
+int LinkedList::at(const unsigned int POS){
+    if (POS < 0 || POS >= listSize) {
+        return T();
+    } else {
+        Node *n = pHead;
+        for (unsigned int i = 0; i < POS; i++){
+            n = n->pNext;
+        }
+        return n->value;
+    }
+}
+
 unsigned int LinkedList::size() {               
     Node *n = pHead;
     int nCount = 0;
