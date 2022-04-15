@@ -19,7 +19,6 @@ int main(){
     cout << intList.get(2) << endl;
     cout << intList.size() << endl;
     intList.print();
-    intList.~DoublyLinkedList<int>();
 
     return 0;
 }
