@@ -7,9 +7,9 @@ class LinkedList {
 private:
     unsigned int listSize;  
     Node<T> *mMakeNodeForValue (const T);
+public:
     Node<T> *pHead;
     Node<T> *pTail;
-public:
     LinkedList<T>();
     ~LinkedList<T>();
     LinkedList(const LinkedList<T> &list);
@@ -52,6 +52,7 @@ template <typename T>
 LinkedList<T>::LinkedList(const LinkedList<T> &list){
     pHead = new Node<T>();
     pTail = new Node<T>();
+    cout << "Copying list..." << endl;
     pHead = list.pHead;
     pTail = list.pTail;
     listSize = size();
@@ -160,7 +161,7 @@ template <typename T>
 unsigned int LinkedList<T>::size() {               
     Node<T> *n = pHead;
     int nCount = 0;
-    if (n == nullptr) {
+    if (n == NULL) {
         return 0;
     } else {
         do {
@@ -174,7 +175,7 @@ unsigned int LinkedList<T>::size() {
 template <typename T>
 void LinkedList<T>::print(){
     Node<T> *n = pHead;
-    if (pHead == nullptr){
+    if (pHead == NULL){
         cout << "Empty list" << endl;
     } else { 
         cout << "List contents: ";
