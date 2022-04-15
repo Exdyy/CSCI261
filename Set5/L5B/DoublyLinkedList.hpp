@@ -26,6 +26,7 @@ public:
     unsigned int size();
     void print();
     void printReverse();
+    void sort();
 };
 
 template <typename T>
@@ -271,5 +272,18 @@ void DoublyLinkedList<T>::printReverse(){
             n = n->pPrev;
         } while (n != pHead->pPrev);
         cout << endl;
+    }
+}
+
+template <typename T>
+void DoublyLinkedList<T>::sort(){
+    T x;
+    int n = size();
+    for (int i = 1; i < n; i++){
+        x = this.get(i)
+        int j = i - 1;
+        while (j >= 0 && this.get(j) > x){
+            this
+        }
     }
 }
