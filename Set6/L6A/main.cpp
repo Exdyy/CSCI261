@@ -6,7 +6,7 @@ using namespace std;
 
 int main(){
     string userInput;
-    cout << "Enter a file name to open: ";
+    cout << "Enter a file name: ";
     cin >> userInput;
 
     ifstream in;
@@ -18,7 +18,7 @@ int main(){
     if (!in.is_open()){
         cout << "Error opening file..." << endl;
     } else {
-        cout << "File opened!" << endl;
+        cout << "File: " << userInput << " opened" << endl << endl;
     }
     
     in.get(c);
@@ -51,7 +51,7 @@ int main(){
         }
         cout << endl;
     }
-    cout << "The min is: " << min << endl;
+    cout << endl << "The min is: " << min << endl;
     cout << "The max is: " << max << endl;
 
     return 0;

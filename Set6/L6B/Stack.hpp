@@ -1,40 +1,30 @@
-/* CSCI 261: Assignment 5: L5D - Sorting II & Recursion II: Merge Sort via the Call Stack
- *
- * Author: Nick Willis
- * Resources used (Office Hours, Tutoring, Other Students, etc & in what capacity):
- *     // list here any outside assistance you used/received while following the
- *     // CS@Mines Collaboration Policy and the Mines Academic Code of Honor
- *     // Lecture slides, stackOverflow for fixing errors, https://www.interviewkickstart.com/learn/merge-sort-for-linked-list
- * This program is supposed to perform a merge sort on a linked list, but I have tried for way too many hours and still cannot get this to work, so here is my final attempt for now.
- */
 #include "Node.hpp"
 #include <iostream>
 using namespace std;
 
 template <typename T>
-class LinkedList {
+class Stack {
 private:
     unsigned int listSize;  
     Node<T> *mMakeNodeForValue (const T);
 public:
     Node<T> *pHead;
     Node<T> *pTail;
-    LinkedList<T>();
-    ~LinkedList<T>();
-    LinkedList(const LinkedList<T> &list);
-    LinkedList &operator=(const LinkedList<T> &list);
-    void pushFront (T);
-    void pushBack (T);
-    T popFront ();
-    T front();
-    T back();
+    Stack<T>();
+    ~Stack<T>();
+    Stack(const Stack<T> &list);
+    Stack &operator=(const Stack<T> &list);
+    void push (T);
+    T pop ();
+    T peak();
     T at(const unsigned int);
     unsigned int size();
     void print();
+    bool isEmpty();
 };
 
 template <typename T>
-LinkedList<T>::LinkedList(){
+Stack<T>::Stack(){
     pHead = new Node<T>();
     pTail = new Node<T>();
     pHead = nullptr;
@@ -43,7 +33,7 @@ LinkedList<T>::LinkedList(){
 }
 
 template <typename T>
-LinkedList<T>::~LinkedList(){
+Stack<T>::~Stack(){
     Node<T> *n = pHead;
     Node<T> *next = nullptr;
     while (n != nullptr){
@@ -58,7 +48,7 @@ LinkedList<T>::~LinkedList(){
 }
 
 template <typename T>
-LinkedList<T>::LinkedList(const LinkedList<T> &list){
+Stack<T>::Stack(const Stack<T> &list){
     pHead = new Node<T>();
     pTail = new Node<T>();
     cout << "Copying list..." << endl;
@@ -68,8 +58,8 @@ LinkedList<T>::LinkedList(const LinkedList<T> &list){
 }
 
 template <typename T>
-LinkedList<T> &LinkedList<T>::operator=(const LinkedList<T>& list){
-    LinkedList<T> temp(list);
+Stack<T> &Stack<T>::operator=(const Stack<T>& list){
+    Stack<T> temp(list);
     swap(temp.pHead, pHead);
     swap(temp.pTail, pTail);
     swap(temp.listSize, listSize);
@@ -77,7 +67,7 @@ LinkedList<T> &LinkedList<T>::operator=(const LinkedList<T>& list){
 }
 
 template <typename T>
-Node<T>* LinkedList<T>::mMakeNodeForValue (const T VALUE){
+Node<T>* Stack<T>::mMakeNodeForValue (const T VALUE){
     Node<T> *newNode = new Node<T>();     //Allocate space for new Node<T> in free store
     newNode->value = VALUE;               //Set value of Node<T>
     newNode->pNext = nullptr;             //Set pointer of Node<T> to nullptr
@@ -85,24 +75,7 @@ Node<T>* LinkedList<T>::mMakeNodeForValue (const T VALUE){
 }
 
 template <typename T>
-void LinkedList<T>::pushFront (const T VALUE) {
-    Node<T> *n = mMakeNodeForValue(VALUE);
-    listSize = size();
-    if (listSize == 0){
-        pHead = n;
-        pTail = pHead;
-    } else if (listSize == 1) {
-        pHead = n;
-        pHead->pNext = pTail;
-    } else {
-        n->pNext = pHead;
-        pHead = n;
-    }
-    listSize = size();
-}
-
-template <typename T>
-void LinkedList<T>::pushBack (T VALUE){
+void Stack<T>::push (T VALUE){
     Node<T> *n = mMakeNodeForValue (VALUE);
     listSize = size();
     if (listSize == 0){
@@ -119,11 +92,12 @@ void LinkedList<T>::pushBack (T VALUE){
 }
 
 template <typename T>
-T LinkedList<T>::popFront (){
+T Stack<T>::pop (){
     if (pHead != nullptr) {
         Node<T> *temp = pHead;
         int frontVal = temp->value;
         pHead = pHead->pNext;
+        temp->pNext = nullptr;
         listSize = size();
         return frontVal;
     } else {
@@ -132,7 +106,7 @@ T LinkedList<T>::popFront (){
 }
 
 template <typename T>
-T LinkedList<T>::front(){
+T Stack<T>::peak(){
     if (pHead != nullptr) {
         return pHead->value;
     } else {
@@ -141,20 +115,7 @@ T LinkedList<T>::front(){
 }
 
 template <typename T>
-T LinkedList<T>::back(){
-    if (pHead == nullptr) {
-        return T();
-    } else {
-        Node<T> *n = pHead;
-        while (n != pTail) {
-            n = n->pNext;
-        }
-        return n->value;
-    }
-}
-
-template <typename T>
-T LinkedList<T>::at(const unsigned int POS){
+T Stack<T>::at(const unsigned int POS){
     if (POS < 0 || POS >= listSize) {
         return T();
     } else {
@@ -167,7 +128,7 @@ T LinkedList<T>::at(const unsigned int POS){
 }
 
 template <typename T>
-unsigned int LinkedList<T>::size() {               
+unsigned int Stack<T>::size() {                
     Node<T> *n = pHead;
     int nCount = 0;
     if (n == NULL) {
@@ -182,7 +143,7 @@ unsigned int LinkedList<T>::size() {
 }
 
 template <typename T>
-void LinkedList<T>::print(){
+void Stack<T>::print(){
     Node<T> *n = pHead;
     if (pHead == NULL){
         cout << "Empty list" << endl;
@@ -193,5 +154,14 @@ void LinkedList<T>::print(){
             n = n->pNext;
         } while (n != pTail->pNext);
         cout << endl;
+    }
+}
+
+template <typename T>
+bool Stack<T>::isEmpty(){
+    if (pHead == NULL){
+        return true;
+    } else {
+        return false;
     }
 }
