@@ -94,9 +94,12 @@ void Queue<T>::push (T VALUE){
 template <typename T>
 T Queue<T>::pop (){
     if (pHead != nullptr) {
-        Node<T> *temp = pHead;
+        Node<T> *temp = new Node<T>;
+        temp = pHead;
         int peakVal = temp->value;
         pHead = pHead->pNext;
+        temp->pNext = nullptr;
+        delete temp;
         listSize = size();
         return peakVal;
     } else {

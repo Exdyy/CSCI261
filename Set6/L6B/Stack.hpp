@@ -9,7 +9,6 @@ private:
     Node<T> *mMakeNodeForValue (const T);
 public:
     Node<T> *pHead;
-    Node<T> *pTail;
     Stack<T>();
     ~Stack<T>();
     Stack(const Stack<T> &list);
@@ -26,9 +25,7 @@ public:
 template <typename T>
 Stack<T>::Stack(){
     pHead = new Node<T>();
-    pTail = new Node<T>();
     pHead = nullptr;
-    pTail = nullptr;
     listSize = 0;
 }
 
@@ -43,17 +40,14 @@ Stack<T>::~Stack(){
         n = next;
     }
     pHead = nullptr;
-    pTail = nullptr;
     listSize = 0;
 }
 
 template <typename T>
 Stack<T>::Stack(const Stack<T> &list){
     pHead = new Node<T>();
-    pTail = new Node<T>();
     cout << "Copying list..." << endl;
     pHead = list.pHead;
-    pTail = list.pTail;
     listSize = size();
 }
 
@@ -61,7 +55,6 @@ template <typename T>
 Stack<T> &Stack<T>::operator=(const Stack<T>& list){
     Stack<T> temp(list);
     swap(temp.pHead, pHead);
-    swap(temp.pTail, pTail);
     swap(temp.listSize, listSize);
     return *this;
 }
@@ -80,13 +73,17 @@ void Stack<T>::push (T VALUE){
     listSize = size();
     if (listSize == 0){
         pHead = n;
-        pTail = pHead;
-    } else if (listSize == 1){
-        pTail = n;
-        pHead->pNext = pTail;
+    } else if(listSize == 1){
+        n = pHead->pNext;
     } else {
-        pTail->pNext = n;
-        pTail = n;
+        Node<T> *temp = new Node<T>;
+        temp = pHead;
+        for (int i = 0; i < listSize; i++){
+            temp = temp->pNext;
+        }
+        temp->pNext = n;
+        pHead = n;
+        delete temp;
     }
     listSize = size();
 }
@@ -94,12 +91,13 @@ void Stack<T>::push (T VALUE){
 template <typename T>
 T Stack<T>::pop (){
     if (pHead != nullptr) {
-        Node<T> *temp = pHead;
-        int frontVal = temp->value;
-        pHead = pHead->pNext;
-        temp->pNext = nullptr;
-        listSize = size();
-        return frontVal;
+        Node<T> *temp = new Node<T>;
+        temp  = pHead;
+        while (temp->pNext != nullptr){
+            temp = temp->pNext;
+        }
+        int backVal = temp->value;
+        return backVal;
     } else {
         return T();
     } 
@@ -137,7 +135,7 @@ unsigned int Stack<T>::size() {
         do {
             n = n->pNext;
             nCount++;
-        } while (n != pTail->pNext);
+        } while (n != nullptr);
         return nCount;
     }
 }
@@ -152,7 +150,7 @@ void Stack<T>::print(){
         do {
             cout << n->value << ' ';
             n = n->pNext;
-        } while (n != pTail->pNext);
+        } while (n != nullptr);
         cout << endl;
     }
 }
