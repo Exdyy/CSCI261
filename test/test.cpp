@@ -37,6 +37,14 @@ int main(){
         cout << *&pArray[i] << ' ';
     }
     cout << endl;
+
+    bool checked[10][10] = {false};
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++){
+            cout << checked[i][j] << ' ';
+        }
+        cout << endl;
+    }
     return 0;
 
 }

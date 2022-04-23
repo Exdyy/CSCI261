@@ -1,3 +1,13 @@
+/* CSCI 261: Assignment 6: L6A - Multidimensional Data
+ *
+ * Author: Nick Willis
+ * Resources used (Office Hours, Tutoring, Other Students, etc & in what capacity):
+ *     // list here any outside assistance you used/received while following the
+ *     // CS@Mines Collaboration Policy and the Mines Academic Code of Honor
+ *     // Lecture slides, cplusplus.org
+ * This program reads data from a file which is comprised of a square 2D array, store the values into a 2D array, print the data to the console, and find/print the min and max values in the array.
+ */
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
