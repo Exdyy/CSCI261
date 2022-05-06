@@ -8,27 +8,25 @@ class Employee{
     string mLast;
     double mPay;
     string mPhone;
-    int mID;
 
     public:
     string note;
-    string getName();
+    string getName() const;
     void setName();
-    double getPay();
+    double getPay() const;
     void setPay();
+    string getPhone() const;
+    void setPhone();
     void makeNote();
 };
 
-string Employee::getName(){
-    string name;
+string Employee::getName() const{
+    string name = mFirst + " " + mLast;
+    char c;
     int i = 0;
-    while (mFirst[i]){
-        name += toupper(mFirst[i]);
-        i++;
-    }
-    name += ' ';
-    while (mLast[i]){
-        name += toupper(mLast[i]);
+    while (name[i]){
+        c = toupper(name[i]);
+        name[i] = c;
         i++;
     }
     return name;
@@ -46,7 +44,7 @@ void Employee::setName(){
     mLast = tempName;
 }
 
-double Employee::getPay(){
+double Employee::getPay() const{
     return mPay;
 }
 
@@ -55,9 +53,18 @@ void Employee::setPay(){
     cin >> mPay;
 }
 
+string Employee::getPhone() const{
+    return mPhone;
+}
+
+void Employee::setPhone(){
+    cout << "EMPLOYEE PHONE: ";
+    cin >> mPhone;
+}
+
 void Employee::makeNote(){
     string temp;
     cout << "Add employee note here: ";
-    cin >> temp;
+    getline(cin >> ws, temp);
     note = note + temp;
 }

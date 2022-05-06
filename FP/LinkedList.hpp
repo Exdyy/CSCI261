@@ -16,6 +16,7 @@ public:
     LinkedList &operator=(const LinkedList<T> &list);
     void pushFront (T);
     void pushBack (T);
+    Node<T>* getHead();
     T popFront ();
     T front();
     T back();
@@ -110,6 +111,11 @@ void LinkedList<T>::pushBack (T VALUE){
 }
 
 template <typename T>
+Node<T>* LinkedList<T>::getHead() {
+    return pHead;
+    }
+
+template <typename T>
 T LinkedList<T>::popFront (){
     if (pHead != nullptr) {
         Node<T> *temp = pHead;
@@ -178,11 +184,14 @@ void LinkedList<T>::print(){
     if (pHead == nullptr){
         cout << "Empty list" << endl;
     } else { 
-        cout << "List contents: ";
+        cout << "EMPLOYEE LIST" << endl;
+        int i = 1;
         do {
-            cout << n->value << ' ';
+            cout << i << ": " << n->value.getName() << endl;
             n = n->pNext;
-        } while (n != pTail->pNext);
+            i++;
+        } while (n->pNext != nullptr);
+        cout << i << ": " << n->value.getName() << endl;
         cout << endl;
     }
 }
